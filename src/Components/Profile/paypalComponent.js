@@ -13,7 +13,7 @@ export default function PaypalComponent(props) {
             createOrder: (data, actions) => {
               console.log("onclick data",data);
               return actions.order.create({
-                intent: "CAPTURE",
+                intent: "",
                 purchase_units: [
                   {
                     description: values.dsc,

@@ -9,13 +9,13 @@ import axios from 'axios';
 export default function ProfileSecondry() {
     const image =useContext(useContexts);
     const {profileImg, setProfileImg} = image;
-    useEffect(() => {
-        var profileUpdate = JSON.parse(localStorage.getItem('profileUpdate'));
-        setFName(profileUpdate.first_name);
-        setLName(profileUpdate.last_name);
-        setPhone(profileUpdate.phone);
-        setEmail(profileUpdate.email)
-        }, [1])
+    // useEffect(() => {
+    //     var profileUpdate = JSON.parse(localStorage.getItem('profileUpdate'));
+    //     setFName(profileUpdate.first_name);
+    //     setLName(profileUpdate.last_name);
+    //     setPhone(profileUpdate.phone);
+    //     setEmail(profileUpdate.email)
+    //     }, [1])
       // Retrieve the object from storage
       var retrievedObject = JSON.parse(localStorage.getItem('user'));
       console.log('retrievedObject: ', retrievedObject);
