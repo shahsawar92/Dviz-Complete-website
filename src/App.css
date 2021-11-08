@@ -1,0 +1,12 @@
+@media (max-width: 1150px) and (min-width:760px) {
+    /* .costumWidth{
+    padding-left: 120px;
+    } */
+}
+
+@media (max-width: 1023px) {
+    .menuFix{
+        position: fixed;
+    }
+    
+}

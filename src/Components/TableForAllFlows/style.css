@@ -1,0 +1,62 @@
+@media only screen and (max-width: 600px){
+    table {
+      padding: 0 30px !important;
+      width: 100% !important;
+      overflow-wrap: anywhere;
+    }  
+  
+    
+    table td, table th {
+      border: 1px solid #ddd;
+      padding: 3px;
+      text-align: center;
+    }
+  }
+      
+      
+      table {
+          border-collapse: collapse;
+          width: 100%;
+          margin: auto;
+        }  
+      
+        
+        table td, table th {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+        }
+        
+        table tr:nth-child(even){background-color: #f2f2f2;}
+        
+        table tr:hover {background-color: #ddd;}
+        
+        table th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: center;
+         
+        }
+        table th:last-child{
+          border-right: none;
+        }
+        table th:first-child{
+          border-left: none;
+        }
+
+        /* ................................... */
+        #globalfilter{
+          float: right;
+        }
+        #globalfilter input{
+          border: 1px solid gray;
+          border-radius: 8%;
+          margin-bottom: 5px;
+          outline: greenyellow;
+          
+          
+        }
+        #globalfilter input:active{
+        border: 1px solid greenyellow;
+        outline: greenyellow;
+        }

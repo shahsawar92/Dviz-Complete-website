@@ -1,0 +1,10 @@
+export const SIGN_UP = '/Signup';
+export const SIGN_IN = '/Signin';
+export const PASSWORD_FORGET = '/ForgetPassword';
+export const ASSETS= '/Assets';
+export const DASHBOARD= '/dashboard';
+export const LOGOUT = '/LogOut';
+export const NAVBAR= '/NavBar';
+export const NOTIFICATIONS ='/Notifications';
+export const PROFILE ="/Profile";
+export const STORE= '/Store';

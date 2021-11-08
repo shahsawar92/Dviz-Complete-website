@@ -1,0 +1,104 @@
+.main{
+    /* display: block; */
+    z-index: 0;
+}
+/* header */
+.header{
+   width: 100%;
+   display: flex;
+}
+/* single image in header */
+.img{
+    
+   background-color: #FBFBFB;
+    width: 100px;
+    height: 100px;
+}
+/* for skeleton loading... */
+.skeleton {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+  
+  .skeleton-text {
+   width: 20%;
+   height: 0.25rem;
+  }
+  .skeleton_img{
+      width: 50px;
+      height: 80px;
+  }
+  
+  .skeleton-text:last-child {
+    margin-bottom: 0;
+    width: 20%;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 70%);
+    }
+  
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+  }
+  /* badge */
+ 
+  /* card css */
+.inner_main_container {
+    cursor: pointer;
+    background-color: #f8f8f8;
+    width: 257px;
+    height: 179px;
+    border-radius: 10px;
+    z-index: 0;
+    margin: 25px;
+    margin-bottom: 0 !important;
+    box-shadow: 0px 4px 23px rgb(0 0 0 / 15%);
+}
+
+
+
+
+/* .Content_Flows{
+    background-color: #E56B6F;
+    color: #000;
+} */
+.badgeClrG{
+    background-color: gray;
+
+}
+.badgeClrO{
+    background-color: #EAAC8B;
+}
+.content{
+    background-color: #E56B6F;
+
+}
+.badge{
+    color:white;
+    border: 1;
+    border-radius: 5px;
+    display:flex;
+    justify-content: flex-end;
+    margin-right: -23px;
+} 
+/* .Content {
+    background-color: #E56B6F;
+    color: #000;
+   
+    
+} */
+
+.badge span {
+    width: 65px;
+    height: 25px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.textColor{
+    color: whitesmoke;
+}

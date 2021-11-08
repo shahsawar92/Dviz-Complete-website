@@ -1,0 +1,23 @@
+
+@media  (min-width: 1221px){
+    .costumheight{
+        height: 100vh !important;
+    }    
+}
+
+#eyeinput{
+    position:relative;
+    left:90%;
+    bottom:2.4rem;
+    opacity: 0.4;
+    }
+
+    #eyeinput2{
+        position:relative;
+        left:90%;
+        bottom:2.4rem;
+        opacity: 0.4;
+        }
+    
+
+    
