@@ -22,7 +22,6 @@ import ResetPassword from './Components/ResetPassword';
 import ProtectedLoginRoute from './routeForLogin';
 import EmailSent from './Components/ForgetPassword/emailSent';
 import PasswordChanged from './Components/ResetPassword/passwordChanges';
-import PayPal from './Components/Profile/paypal';
 
 
 
@@ -62,7 +61,7 @@ function App() {
       <Route path={"/ForgetPassword/emailsent"} component={EmailSent} exact/>
       <Route path={"/resetPassword"} component={ResetPassword} exact />
       <Route path={"/resetPassword/passwordchanged"} component={PasswordChanged} exact />
-      <Route path={"/paypal"} component={PayPal} exact />
+    
 
       <Route path="*">
            <Page404 />
