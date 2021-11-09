@@ -1,42 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export default function PaypalComponent(props) {
+export default function PayPal(props) {
    const {setShowModal} = props;
-   const {values}=props;
-   console.log(values);
+
+   const {plan_id}=props
+   console.log("planid",plan_id);
+    const {name}=props
+    console.log("name of pkg:",name);
     
-    const [paid, setPaid] = useState(false);
-    const [error, setError] = useState(null);
-    const paypalRef = useRef();
+    
     useEffect(() => {
         window.paypal.Buttons({
-            createOrder: (data, actions) => {
-              console.log("onclick data",data);
-              return actions.order.create({
-                intent: "CAPTURE",
-                purchase_units: [
-                  {
-                    description: values.dsc,
-                    amount: {
-                      currency_code: "USD",
-                      value: values.price,
-                    },
-                  },
-                ],
-              });
+            style: {
+                shape: 'rect',
+                color: 'silver',
+                layout: 'vertical',
+                label: 'subscribe'
             },
-            onApprove: async (data, actions) => {
-              const order = await actions.order.capture();
-              setPaid(true);
-              console.log(order);
-            },
-            onError: (err) => {
-              setError(err);
-              console.error(err);
-            },
-          })
-          .render(paypalRef.current);
-      }, []);
+
+    createSubscription: function(data, actions) {
+      return actions.subscription.create({
+        'plan_id': plan_id
+      });
+  
+    },
+  
+    onApprove: function(data, actions) {      
+      console.log("response data of paypal:",data);
+    },
+    onError: (err) => {
+        
+        console.error(err);
+      },
+  
+  }).render('#paypal-button-container')
+    },[])
   return (
     <>
       (
@@ -64,7 +62,7 @@ export default function PaypalComponent(props) {
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
                   
-                  <div className="my-4 text-blueGray-500 text-lg leading-relaxed" ref={paypalRef}></div>
+                  <div className="my-4 text-blueGray-500 text-lg leading-relaxed" id={"paypal-button-container"}></div>
                   
                 </div>
                 {/*footer*/}

@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
+import PayPal from '../paypal';
 import PaypalComponent from '../paypalComponent';
 
 export default function Prices() {
     const [showModal, setShowModal] = React.useState(false);
     const [showModal2, setShowModal2] = React.useState(false);
     const [showModal3, setShowModal3] = React.useState(false);
-   const values={disc:"starter",price:100}
-  const  values2={disc:"pro",price:500}
-  const  values3={disc:"vip",price:1000}
+  const plan_id="P-8XC30638NN0098448MEE2UFI"
+  const plan_id2="P-4FC00435N8891101MMEE2VYQ"
+  const plan_id3="P-96A251586U560802XMEE2WQ"
     const handleClick=(props)=>{
         
         if(props===1){
@@ -25,9 +26,9 @@ export default function Prices() {
     }
     return (
         <>
-        {showModal &&<PaypalComponent setShowModal={setShowModal} values={values}/>}
-        {showModal2 &&<PaypalComponent setShowModal={setShowModal2} values={values2}/>}
-        {showModal3 &&<PaypalComponent setShowModal={setShowModal3} values={values3}/>}
+        {showModal &&<PayPal setShowModal={setShowModal} plan_id={plan_id} name={"starter"}/>}
+        {showModal2 &&<PayPal setShowModal={setShowModal2} plan_id={plan_id2} name={"pro"}/>}
+        {showModal3 &&<PayPal setShowModal={setShowModal3} plan_id={plan_id3} name={"vip"}/>}
         <div className="flex md:flex-row flex-col  md:justify-evenly ">
     
         
@@ -41,7 +42,7 @@ export default function Prices() {
                         <p className="text-lg font-semibold self-center pt-2 line-through ">Customization : x </p>
                         <h2 className="text-3xl font-semibold self-center pb-2 pt-4 ">$15</h2>
                         <button className=" w-4/5  border-2 py-2 shadow-lg self-center rounded-lg hover:bg-gray-500"
-                         onClick={()=>handleClick(1)}
+                          onClick={()=>handleClick(1)}
                         >Subscribe</button>
                    </div>
 
