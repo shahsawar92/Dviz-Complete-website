@@ -14,10 +14,10 @@ export default function ProfileSecondry() {
     }
     useEffect(() => {
         var profileUpdate = JSON.parse(localStorage.getItem('profileUpdate'));
-        setFName(profileUpdate.first_name);
-        setLName(profileUpdate.last_name);
-        setPhone(profileUpdate.phone);
-        setEmail(profileUpdate.email)
+        setFName(profileUpdate?.first_name);
+        setLName(profileUpdate?.last_name);
+        setPhone(profileUpdate?.phone);
+        setEmail(profileUpdate?.email)
         }, [])
     //   Retrieve the object from storage
       var retrievedObject = JSON.parse(localStorage.getItem('user'));
