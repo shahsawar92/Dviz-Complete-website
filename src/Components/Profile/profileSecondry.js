@@ -9,6 +9,9 @@ import axios from 'axios';
 export default function ProfileSecondry() {
     const image =useContext(useContexts);
     const {profileImg, setProfileImg} = image;
+    const profile_image={
+        'profile_image':profileImg  
+    }
     useEffect(() => {
         var profileUpdate = JSON.parse(localStorage.getItem('profileUpdate'));
         setFName(profileUpdate.first_name);
@@ -35,7 +38,7 @@ export default function ProfileSecondry() {
       }
       const URL='https://shahbaz.dviz.tech/update/ProfileImage/'
   useEffect(()=>{
-    axios.post(URL, profileImg ,config)
+    axios.post(URL, profile_image ,config)
     .then(response => {
        
         console.log('image response :',response);
@@ -62,13 +65,7 @@ export default function ProfileSecondry() {
         newImage.readAsDataURL(e.target.files[0]);
         e.preventDefault();
     }
-    
-    
-    
-    
-    
-    
-    
+
     return (
         <div className="relative z-100">
          <EditFrom display={display} setD={setDisplay} userInfo={userInfo}/>
