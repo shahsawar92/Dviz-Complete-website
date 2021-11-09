@@ -1,8 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import axios from 'axios'
 export default function PayPal(props) {
    const {setShowModal} = props;
 
+   let config = {
+    headers: {
+       'Content-Type': 'application/json'
+    }
+  }
+  const URL='#'
    const {plan_id}=props
    console.log("planid",plan_id);
     const {name}=props
@@ -27,6 +33,12 @@ export default function PayPal(props) {
   
     onApprove: function(data, actions) {      
       console.log("response data of paypal:",data);
+      axios.post(URL, name ,config)
+    .then(response => {
+       
+        console.log("response",response);
+    
+    }).catch(error=>{ console.log(error); }  )
     },
     onError: (err) => {
         

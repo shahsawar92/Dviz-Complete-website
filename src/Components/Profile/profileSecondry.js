@@ -9,14 +9,14 @@ import axios from 'axios';
 export default function ProfileSecondry() {
     const image =useContext(useContexts);
     const {profileImg, setProfileImg} = image;
-    // useEffect(() => {
-    //     var profileUpdate = JSON.parse(localStorage.getItem('profileUpdate'));
-    //     setFName(profileUpdate.first_name);
-    //     setLName(profileUpdate.last_name);
-    //     setPhone(profileUpdate.phone);
-    //     setEmail(profileUpdate.email)
-    //     }, [1])
-      // Retrieve the object from storage
+    useEffect(() => {
+        var profileUpdate = JSON.parse(localStorage.getItem('profileUpdate'));
+        setFName(profileUpdate.first_name);
+        setLName(profileUpdate.last_name);
+        setPhone(profileUpdate.phone);
+        setEmail(profileUpdate.email)
+        }, [])
+    //   Retrieve the object from storage
       var retrievedObject = JSON.parse(localStorage.getItem('user'));
       console.log('retrievedObject: ', retrievedObject);
 
@@ -34,13 +34,13 @@ export default function ProfileSecondry() {
         }
       }
       const URL='https://shahbaz.dviz.tech/update/ProfileImage/'
-//   useEffect(()=>{
-//     axios.post(URL, profileImg ,config)
-//     .then(response => {
+  useEffect(()=>{
+    axios.post(URL, profileImg ,config)
+    .then(response => {
        
-//         console.log('image response :',response);
+        console.log('image response :',response);
     
-//     }).catch(error=>{ console.log(error); }  )    },[profileImg])
+    }).catch(error=>{ console.log(error); }  )    },[profileImg])
   
     const callTrans=()=>{
         setTrans(true);

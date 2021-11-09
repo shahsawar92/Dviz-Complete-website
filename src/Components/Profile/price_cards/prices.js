@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PayPal from '../paypal';
-import PaypalComponent from '../paypalComponent';
 
 export default function Prices() {
     const [showModal, setShowModal] = React.useState(false);
