@@ -7,11 +7,22 @@ import axios from 'axios';
 
 
 export default function ProfileSecondry() {
+        //   Retrieve the object from storage
+        var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
+        console.log('retrievedObject: ', retrievedObject);
     const image =useContext(useContexts);
     const {profileImg, setProfileImg} = image;
     const profile_image={
         'profile_image':profileImg  
     }
+    let config = {
+        headers: {
+           "X-CSRFToken" : retrievedObject.access_token
+        }
+      }
+      const URL='https://shahbaz.dviz.tech/update/ProfileImage/'
+      const URL_PROFILE="https://shahbaz.dviz.tech/profile_page/"
+
     useEffect(() => {
         var profileUpdate = JSON.parse(localStorage.getItem('profileUpdate'));
         setFName(profileUpdate?.first_name);
@@ -19,10 +30,21 @@ export default function ProfileSecondry() {
         setPhone(profileUpdate?.phone);
         setEmail(profileUpdate?.email)
         }, [])
-    //   Retrieve the object from storage
-      var retrievedObject = JSON.parse(localStorage.getItem('user'));
-      console.log('retrievedObject: ', retrievedObject);
 
+        const val={
+            'pk': retrievedObject.pk,
+        }
+      //useeffect for profiledata
+        useEffect(()=>{
+        axios.post(URL_PROFILE,config)
+        .then(response => {
+        console.log('profile info response :',response);
+    }).catch(error=>{ console.log(error); }  )    },
+    
+    [])
+  
+        
+      
     const [uName,setUName]= useState(retrievedObject.username);
     const [fName,setFName]= useState(retrievedObject.first_name);
     const [lName,setLName]= useState(retrievedObject.last_name);
@@ -31,19 +53,14 @@ export default function ProfileSecondry() {
     
     const [display,setDisplay]=useState(false)
     const [TransH,setTrans]=useState(false)
-    let config = {
-        headers: {
-           'Content-Type': 'application/json'
-        }
-      }
-      const URL='https://shahbaz.dviz.tech/update/ProfileImage/'
-  useEffect(()=>{
-    axios.post(URL, profile_image ,config)
-    .then(response => {
-       
-        console.log('image response :',response);
     
-    }).catch(error=>{ console.log(error); }  )    },[profileImg])
+//   useEffect(()=>{
+//     axios.post(URL, profile_image ,config)
+//     .then(response => {
+       
+//         console.log('image response :',response);
+    
+//     }).catch(error=>{ console.log(error); }  )    },[profileImg])
   
     const callTrans=()=>{
         setTrans(true);

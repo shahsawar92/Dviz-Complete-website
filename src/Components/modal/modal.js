@@ -1,24 +1,46 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useContexts } from '../Context/context';
 import { icons } from '../../Utilities/flow_icons';
 import './style.css'
-export default function Model(props) {
+import axios from 'axios';
 
+
+export default function Model(props) {
     const {popUpData,setDashboard_data }=useContext(useContexts);
+    var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
+      console.log('retrievedObject: ', retrievedObject);
+    let config = {
+        headers: {
+           'Content-Type': 'application/json'
+        }
+      }
+      const URL='#';
+      const values={
+          'access_token':retrievedObject.access_token,
+          'flowName':popUpData?.popUpData[0]?.flowName,
+          'flowRef':popUpData?.popUpData[0]?.flowRef
+      }
+    const [useEffectToggle,setuseEffectToggle]=useState(false);
+    
 
         const handleBack=()=>{
         props.setVisiable(false);
     } 
-    const handleFunction= ()=>{
-        setDashboard_data([popUpData?.popUpData[0]?.flowName,popUpData?.popUpData[0]?.flowRef]);
-       
+    const handleFunction=()=>{
+        setuseEffectToggle(!useEffectToggle);
     }
-   
-    
-    
+    const fetchData= ()=>{
+        axios.post(URL, values,config)
+        .then(response => {console.log(response);})
+        .catch(error=>{console.log(error)})
+        setDashboard_data([]);
+    }
 
-     
+    useEffect(()=>{
+       fetchData();
+    },[useEffectToggle])
+    
     return (
         <div className={` bg-black md-effect-1 anim animated fadeIn fixed w-screen z-50 pin overflow-auto bg-smoke-dark bg-opacity-90    inset-0  ${props.visiable? "flex":"hidden"} justify-center items-center`} >
         {popUpData?.popUpData[0]?.NoOFGroovs ? 

@@ -35,7 +35,7 @@ const history=useHistory();
          .max(20, 'Must be 20 characters or less')
          .required('Username Required'),
          password: Yup.string()
-         .required('Password Required') 
+         .required('Password Required')
          .min(8, 'Password is too short - should be 8 chars minimum.')
          .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
      }),
@@ -48,6 +48,7 @@ const history=useHistory();
               if(response.status===200){
                 setSbumitting(false);
                 localStorage.setItem("user",JSON.stringify(response.data.user))
+                localStorage.setItem("userdata",JSON.stringify(response.data))
                 Cookies.set('access',response.data.access_token)
                 Cookies.set('refresh',response.data.refresh_token)                
                 history.push(`${ROUTES.DASHBOARD}`);
