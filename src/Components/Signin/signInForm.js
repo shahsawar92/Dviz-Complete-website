@@ -41,16 +41,13 @@ const history=useHistory();
      }),
      onSubmit:(values) => {
        console.log("values are:",values);
-       
        setSbumitting(true);  
         axios.post(URL, values,config)
             .then(response => {
               console.log(response);
               if(response.status===200){
                 setSbumitting(false);
-                
                 localStorage.setItem("user",JSON.stringify(response.data.user))
-               
                 Cookies.set('access',response.data.access_token)
                 Cookies.set('refresh',response.data.refresh_token)                
                 history.push(`${ROUTES.DASHBOARD}`);

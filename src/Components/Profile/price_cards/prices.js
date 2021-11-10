@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PayPal from '../paypal';
+import PaypalComponent from '../paypalComponent';
 
 export default function Prices() {
     const [counterVip, setCounterVip]=useState(0)
@@ -10,13 +11,17 @@ export default function Prices() {
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setShowModal2] =useState(false);
     const [showModal3, setShowModal3] = useState(false);
+    const [addProGrooves,setaddProGroves]=useState(false)
+    const [addVipGrooves,setaddVipGrooves]=useState(false);
   const plan_id="P-8XC30638NN0098448MEE2UFI";
   const plan_id2="P-4FC00435N8891101MMEE2VYQ";
   const plan_id3="P-96A251586U560802XMEE2WQI";
+  const plan_id_addPro="P-3UF088138S573254CMEXZAWY";
+  const plan_id_addVip="P-944133830R0875825MEXZAAA";
   
   let starterPlan = false;
-  let proPlan = true;
-  let vipPlan = false;
+  let proPlan = false;
+  let vipPlan = true;
   useEffect(()=>{
       if(starterPlan){ setStarterActive(true); setvipActive(false);setproActive(false)}
       if (proPlan ) { setStarterActive(false); setvipActive(false);setproActive(true)}
@@ -25,18 +30,23 @@ export default function Prices() {
   
     
   //functions
-    const handleClick=(props)=>{
-        
+    const handleClick=(e,props)=>{
+        console.log(e.target.innerText);
         if(props===1){
             
             setShowModal(true);
         }
         if(props===2){
             
+            if(e.target.innerText=="Add Grooves"){
+                setaddProGroves(true);
+            }else
             setShowModal2(true);
         }
         if(props===3){
-            
+            if(e.target.innerText=="Add Grooves"){
+                setaddVipGrooves(true);
+            }else
             setShowModal3(true);
         }
     }
@@ -70,9 +80,13 @@ const handleCounterplusPro=()=>{
 }
     return (
         <>
+       
         {showModal &&<PayPal setShowModal={setShowModal} plan_id={plan_id} name={"starter"}/>}
         {showModal2 &&<PayPal setShowModal={setShowModal2} plan_id={plan_id2} name={"pro"}/>}
         {showModal3 &&<PayPal setShowModal={setShowModal3} plan_id={plan_id3} name={"vip"}/>}
+        {addProGrooves &&<PaypalComponent setShowModal={setaddProGroves} plan_id={plan_id_addPro} name={"vip"} grooves_quantity={counterPro}/>}
+        {addVipGrooves &&<PaypalComponent setShowModal={setaddVipGrooves} plan_id={plan_id_addVip} name={"vip"} grooves_quantity={counterVip}/>}
+
         <div className="flex md:flex-row flex-col md:justify-evenly ">
     
         
@@ -110,7 +124,7 @@ const handleCounterplusPro=()=>{
                         <span className={vipActive||starterActive?"hidden": "self-center"} id={"VipCounter"} ><button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterminusPro()}>-</button><span className="border-2 border-gray-800 py-2 px-4">{counterPro}</span> <button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterplusPro()}>+</button></span>
                         <button className="border-2 w-4/5 py-2 shadow-lg self-center rounded-lg hover:bg-gray-500 "
                         disabled={starterActive || vipActive}  
-                        onClick={()=>handleClick(2)}
+                        onClick={(e)=>handleClick(e,2)}
                         >{proActive?"Add Grooves":"Subscribe"}</button>
                    </div>
             
@@ -130,7 +144,7 @@ const handleCounterplusPro=()=>{
                         <h2 className="text-3xl font-semibold self-center pb-2 pt-4 ">$1000</h2>
                         <span  className={proActive||starterActive?"hidden": "self-center"} id={"VipCounter"} ><button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterminus()}>-</button><span className="border-2 border-gray-800 py-2 px-4">{counterVip}</span> <button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterplus()}>+</button></span>
                         <button disabled={starterActive || proActive} className=" w-4/5 self-center border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2"
-                         onClick={vipActive?()=>handleClick(3):()=>alert("done")}
+                         onClick={(e)=>handleClick(e,3)}
                         >{vipActive?"Add Grooves":"Subscribe"}</button>
                    </div>
             

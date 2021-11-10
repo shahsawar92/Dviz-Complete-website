@@ -1,42 +1,55 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from 'axios';
 
 export default function PaypalComponent(props) {
-   const {setShowModal} = props;
-   const {values}=props;
-   console.log(values);
-    
-    const [paid, setPaid] = useState(false);
-    const [error, setError] = useState(null);
-    const paypalRef = useRef();
-    useEffect(() => {
-        window.paypal.Buttons({
-            createOrder: (data, actions) => {
-              console.log("onclick data",data);
-              return actions.order.create({
-                intent: "CAPTURE",
-                purchase_units: [
-                  {
-                    description: values.dsc,
-                    amount: {
-                      currency_code: "USD",
-                      value: values.price,
-                    },
-                  },
-                ],
-              });
-            },
-            onApprove: async (data, actions) => {
-              const order = await actions.order.capture();
-              setPaid(true);
-              console.log(order);
-            },
-            onError: (err) => {
-              setError(err);
-              console.error(err);
-            },
-          })
-          .render(paypalRef.current);
-      }, []);
+  const {setShowModal} = props;
+
+  let config = {
+   headers: {
+      'Content-Type': 'application/json'
+   }
+ }
+ const URL='#'
+  const {plan_id}=props
+  console.log("planid",plan_id);
+   const {name}=props
+   console.log("name of pkg:",name);
+   const {grooves_quantity}=props
+   console.log(grooves_quantity);
+   
+   useEffect(() => {
+       window.paypal.Buttons({
+           style: {
+               shape: 'rect',
+               color: 'silver',
+               layout: 'vertical',
+               label: 'subscribe'
+           },
+
+   createSubscription: function(data, actions) {
+     return actions.subscription.create({
+       plan_id: plan_id,
+       quantity:grooves_quantity
+     });
+ 
+   },
+ 
+   onApprove: function(data, actions) {      
+     console.log("response data of paypal:",data);
+     axios.post(URL, name ,config)
+   .then(response => {
+      
+       console.log("response",response);
+   
+   }).catch(error=>{ console.log(error); }  )
+   },
+   onError: (err) => {
+       
+       console.error(err);
+     },
+ 
+ }).render('#paypal-button-container')
+   },[])
   return (
     <>
       (
@@ -64,7 +77,7 @@ export default function PaypalComponent(props) {
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
                   
-                  <div className="my-4 text-blueGray-500 text-lg leading-relaxed" ref={paypalRef}></div>
+                  <div className="my-4 text-blueGray-500 text-lg leading-relaxed" id={"paypal-button-container"} ></div>
                   
                 </div>
                 {/*footer*/}
