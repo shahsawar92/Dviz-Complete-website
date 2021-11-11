@@ -15,7 +15,9 @@ export default function Prices() {
     const [showModal3, setShowModal3] = useState(false);
     const [addProGrooves,setaddProGroves]=useState(false)
     const [addVipGrooves,setaddVipGrooves]=useState(false);
+    const [clickedPlanName,setPlanClickedName]=useState('')
     const {profileData }=useContext(useContexts);
+    const [buttonClicked,setbuttonClicked]=useState(false);
   const plan_id="P-8XC30638NN0098448MEE2UFI";
   const plan_id2="P-4FC00435N8891101MMEE2VYQ";
   const plan_id3="P-96A251586U560802XMEE2WQI";
@@ -26,16 +28,11 @@ export default function Prices() {
        'Content-Type': 'application/json'
     }
   }
-  const URL='https://shahbaz.dviz.tech/plansubscription/';
+
   let starterPlan = profileData?.starter_plan_check;
   let proPlan = profileData?.pro_plan_check;
   let vipPlan = profileData?.vip_plan_check;
-//   const values={
-//       params:{
-//       'id':4,
-//       'username': 'rehman',
-//       'plan':'Starter' }
-//   }
+
   useEffect(()=>{
       if(starterPlan||proPlan||vipPlan){
       if(starterPlan){ setStarterActive(true); setvipActive(false);setproActive(false)}
@@ -45,46 +42,34 @@ export default function Prices() {
          setStarterActive(false); setvipActive(false);setproActive(false)
       }
   } ,[starterPlan, proPlan, vipPlan])
-  
-  useEffect(()=>{
-    axios.post(URL, {
-        params: {
-            'id':4,
-            'username': 'rehman',
-             'plan':'Starter'
-        }
-    },config)
-    .then(response => {
-      console.log("response of login:",response);
-      if(response.status===200){
-          
-      }
-    })
-    .catch(error=>{
-        console.log("profile:",error);
-    })
 
-    
-  },[])
-console.log("proactive, vipactive, starteractive",proActive,vipActive,starterActive);
+
+//console.log("proactive, vipactive, starteractive",proActive,vipActive,starterActive);
   //functions
     const handleClick=(e,props)=>{
         console.log(e?.target?.innerText);
-        if(props===1){
+        setbuttonClicked(true);
+      
+        setPlanClickedName(e?.target?.innerText);
+        if(props==='Starter'){
             
             setShowModal(true);
+            setPlanClickedName("Starter")
         }
-        if(props===2){
+        if(props==='Pro'){
             
             if(e?.target?.innerText=="Add Grooves"){
                 setaddProGroves(true);
             }else
+            setPlanClickedName("Pro")
             setShowModal2(true);
         }
-        if(props===3){
+        if(props==='Vip'){
             if(e?.target?.innerText=="Add Grooves"){
+
                 setaddVipGrooves(true);
             }else
+            setPlanClickedName("Vip")
             setShowModal3(true);
         }
     }
@@ -119,11 +104,11 @@ const handleCounterplusPro=()=>{
     return (
         <>
        
-        {showModal &&<PayPal setShowModal={setShowModal} plan_id={plan_id} name={"starter"}/>}
-        {showModal2 &&<PayPal setShowModal={setShowModal2} plan_id={plan_id2} name={"pro"}/>}
-        {showModal3 &&<PayPal setShowModal={setShowModal3} plan_id={plan_id3} name={"vip"}/>}
-        {addProGrooves &&<PaypalComponent setShowModal={setaddProGroves} plan_id={plan_id_addPro} name={"vip"} grooves_quantity={counterPro}/>}
-        {addVipGrooves &&<PaypalComponent setShowModal={setaddVipGrooves} plan_id={plan_id_addVip} name={"vip"} grooves_quantity={counterVip}/>}
+        {showModal &&<PayPal setShowModal={setShowModal} plan_id={plan_id} name={"Starter"}/>}
+        {showModal2 &&<PayPal setShowModal={setShowModal2} plan_id={plan_id2} name={"Pro"}/>}
+        {showModal3 &&<PayPal setShowModal={setShowModal3} plan_id={plan_id3} name={"Vip"}/>}
+        {addProGrooves &&<PaypalComponent setShowModal={setaddProGroves} plan_id={plan_id_addPro} name={"Pro"} grooves_quantity={counterPro}/>}
+        {addVipGrooves &&<PaypalComponent setShowModal={setaddVipGrooves} plan_id={plan_id_addVip} name={"Vip"} grooves_quantity={counterVip}/>}
 
         <div className="flex md:flex-row flex-col md:justify-evenly ">
     
@@ -138,7 +123,7 @@ const handleCounterplusPro=()=>{
                         <p className="text-lg font-semibold self-center pt-2 line-through ">Customization : x </p>
                         <h2 className="text-3xl font-semibold self-center pb-2 pt-4 ">$15</h2>
                         <button className=" w-4/5  border-2 py-2 shadow-lg self-center rounded-lg hover:bg-gray-500"
-                          onClick={(e)=>handleClick(e,1)}
+                          onClick={(e)=>handleClick(e,'Starter')}
                           disabled={proActive || vipActive } 
                         >Subscribe</button>
                    </div>
@@ -164,7 +149,7 @@ const handleCounterplusPro=()=>{
                         id={"VipCounter"} ><button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterminusPro()}>-</button><span className="border-2 border-gray-800 py-2 px-4">{counterPro}</span> <button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterplusPro()}>+</button></span>
                         <button className="border-2 w-4/5 py-2 shadow-lg self-center rounded-lg hover:bg-gray-500 "
                         disabled={starterActive || vipActive }  
-                        onClick={(e)=>handleClick(e,2)}
+                        onClick={(e)=>handleClick(e,'Pro')}
                         >{proActive?"Add Grooves":"Subscribe"}</button>
                    </div>
             
@@ -187,7 +172,7 @@ const handleCounterplusPro=()=>{
                         
                         id={"VipCounter"} ><button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterminus()}>-</button><span className="border-2 border-gray-800 py-2 px-4">{counterVip}</span> <button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterplus()}>+</button></span>
                         <button disabled={starterActive || proActive} className=" w-4/5 self-center border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2"
-                         onClick={(e)=>handleClick(e,3)}
+                         onClick={(e)=>handleClick(e,'Vip')}
                         >{vipActive?"Add Grooves":"Subscribe"}</button>
                    </div>
             

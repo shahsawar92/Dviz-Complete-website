@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from 'axios'
+import { useContexts } from "../Context/context";
 export default function PayPal(props) {
    const {setShowModal} = props;
 
@@ -8,12 +9,18 @@ export default function PayPal(props) {
        'Content-Type': 'application/json'
     }
   }
-  const URL='#'
+  const URL='https://shahbaz.dviz.tech/plansubscription/';
    const {plan_id}=props
    console.log("planid",plan_id);
     const {name}=props
     console.log("name of pkg:",name);
-    
+    const {profileData}=useContext(useContexts);
+    // const callAxios=()=>{
+    //   
+  
+      
+    // }
+    // { buttonClicked && callAxios()}
     
     useEffect(() => {
         window.paypal.Buttons({
@@ -33,12 +40,31 @@ export default function PayPal(props) {
   
     onApprove: function(data, actions) {      
       console.log("response data of paypal:",data);
-      axios.post(URL, name ,config)
-    .then(response => {
+    //   axios.post(URL, name ,config)
+    // .then(response => {
        
-        console.log("response",response);
+    //     console.log("response",response);
     
-    }).catch(error=>{ console.log(error); }  )
+    // }).catch(error=>{ console.log(error); }  )
+    axios.get(URL, {
+            params: {
+                'id':profileData.id,
+                'username': profileData.username,
+                 'plan':name
+            }
+        },config)
+        .then(response => {
+          console.log("response of login:",response);
+        
+    
+          if(response.status===200){
+            
+            alert(response?.data?.activated_plan+" Plan Activated  ")  
+          }
+        })
+        .catch(error=>{
+      console.log("profile:",error);
+        })
     },
     onError: (err) => {
         
@@ -46,7 +72,7 @@ export default function PayPal(props) {
       },
   
   }).render('#paypal-button-container')
-    },[])
+    },[1])
   return (
     <>
       (
