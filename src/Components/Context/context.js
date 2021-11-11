@@ -21,6 +21,8 @@ export const Globalprovider=({children})=>{
     const [toggle, setToggle] = useState(true);
 //state for profile image
     const [profileImg,setProfileImg]= useState(images.unKnownImage);
+    //profile info object overAll
+    const [profileData,setProfileData]=useState({});
    //data of dashboard will be sotred here
     const [Dashboard_data, setDashboard_data]=useState("");
     const [Dashboard_card, setDashboard_card]=useState([]);
@@ -83,7 +85,7 @@ function allCat(e){
 //return the wrapper 
     return (
         <useContexts.Provider value={{
-            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo
+            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData
         }}>
             {children}
         </useContexts.Provider>

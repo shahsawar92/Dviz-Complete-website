@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './style.css'
 import { countries } from './data/countries';
 import { icons } from '../../Utilities/flow_icons';
+import { images } from '../../Utilities/Images';
 import { useFormik } from 'formik';
 import axios from 'axios';
 export default function EditFrom(props) {
@@ -35,7 +36,7 @@ const formik = useFormik({
       first_name:props?.userInfo?.fName,
       last_name:props?.userInfo?.lName,
       email:props?.userInfo?.email,
-      phone:""
+      phone:props?.userInfo?.phone
     },
 
     onSubmit:(values) => {

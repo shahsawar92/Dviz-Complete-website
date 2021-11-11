@@ -3,53 +3,69 @@ import './style.css'
 import EditFrom from './nameEdit';
 import { useContexts } from '../Context/context';
 import TranscationHistory from './transcationHistory';
+
 import axios from 'axios';
+import { validateYupSchema } from 'formik';
 
 
 export default function ProfileSecondry() {
         //   Retrieve the object from storage
         var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
         console.log('retrievedObject: ', retrievedObject);
-    const image =useContext(useContexts);
-    const {profileImg, setProfileImg} = image;
-    const profile_image={
-        'profile_image':profileImg  
-    }
+    const {profileImg,profileData,setProfileData} =useContext(useContexts);
+    console.log("profile data ffrom context",profileData);
+    // const {profileImg, setProfileImg} = image;
+    // const profile_image={
+    //     'profile_image':""  
+    // }
+
     let config = {
         headers: {
-           "X-CSRFToken" : retrievedObject.access_token
+            'Content-Type': 'application/json'
+            
         }
       }
       const URL='https://shahbaz.dviz.tech/update/ProfileImage/'
       const URL_PROFILE="https://shahbaz.dviz.tech/profile_page/"
 
     useEffect(() => {
-        var profileUpdate = JSON.parse(localStorage.getItem('profileUpdate'));
-        setFName(profileUpdate?.first_name);
-        setLName(profileUpdate?.last_name);
-        setPhone(profileUpdate?.phone);
-        setEmail(profileUpdate?.email)
+       
         }, [])
 
-        const val={
-            'pk': retrievedObject.pk,
-        }
+       const data= { "id": retrievedObject.user.pk,
+                     "username":retrievedObject.user.username
+                    }
+                    console.log("data here:",data);
+        const myJSON = JSON.stringify(data);
+        
+
+        const headers = { 'Content-Type': 'application/json' }
+    
+
       //useeffect for profiledata
         useEffect(()=>{
-        axios.post(URL_PROFILE,config)
+        //     fetch(URL_PROFILE, { headers })
+        // .then(response => response.json())
+        // .then(data => console.log("data of response",data));
+        axios.get(URL_PROFILE,{
+            params: {
+                "id": retrievedObject.user.pk,
+                     "username":retrievedObject.user.username
+            }
+        },config)
         .then(response => {
+            if(response.status===200){
+                setProfileData(response?.data?.response)
+            }
         console.log('profile info response :',response);
-    }).catch(error=>{ console.log(error); }  )    },
+    }).catch(error=>{ console.log(error); }  ) 
+   },
     
     [])
   
         
       
-    const [uName,setUName]= useState(retrievedObject.username);
-    const [fName,setFName]= useState(retrievedObject.first_name);
-    const [lName,setLName]= useState(retrievedObject.last_name);
-    const [email,setEmail]= useState(retrievedObject.email);
-    const [phone,setPhone]= useState(retrievedObject.phone);
+    
     
     const [display,setDisplay]=useState(false)
     const [TransH,setTrans]=useState(false)
@@ -69,14 +85,18 @@ export default function ProfileSecondry() {
         setDisplay(true);
     }
     const userInfo={
-        uName,email,fName,lName
+        uName:profileData.username,
+        email:profileData.email,
+        fName:profileData.first_name,
+        lName:profileData.last_name,
+        phone:profileData.phone_number
     }
    
     const changePhoto=(e)=>{
         let newImage= new FileReader();
         newImage.onload=()=>{
             if(newImage.readyState===2){
-                setProfileImg(newImage.result);
+                // setProfileImg(newImage.result);
             }
         }
         newImage.readAsDataURL(e.target.files[0]);
@@ -112,7 +132,7 @@ export default function ProfileSecondry() {
             <div className="" >
                 Username
             </div>
-            <div>{uName}</div>
+            <div>{profileData.username}</div>
             </div>
             
            
@@ -121,28 +141,28 @@ export default function ProfileSecondry() {
             <div title={'hello'}>
                 First Name
             </div>
-            <div>{fName}</div>
+            <div>{profileData.first_name}</div>
             </div>
             
             <div className={"hover:bg-gray-100 py-3 pl-2 w-4/5 rounded cursor-pointer"}>
             <div>
                 Last Name 
             </div> 
-            <div>{lName}</div>
+            <div>{profileData.last_name}</div>
             </div>
            
             <div className={"hover:bg-gray-100 py-3 pl-2 w-4/5 rounded flex-wrap cursor-pointer"}>
             <div>
                 Email
             </div>
-            <div>{email}</div>
+            <div>{profileData.email}</div>
             </div>
             <br/>
             <div className={"hover:bg-gray-100 py-3 w-4/5 pl-2 rounded cursor-pointer"}>
             <div>
                 Phone
             </div>
-            <div>{phone}</div>
+            <div>{profileData.phone_number}</div>
             </div>
             </div>
             {/* buttons */}

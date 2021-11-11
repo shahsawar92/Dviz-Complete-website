@@ -44,9 +44,10 @@ const history=useHistory();
        setSbumitting(true);  
         axios.post(URL, values,config)
             .then(response => {
-              console.log(response);
+              console.log("response of login:",response);
               if(response.status===200){
                 setSbumitting(false);
+                
                 localStorage.setItem("user",JSON.stringify(response.data.user))
                 localStorage.setItem("userdata",JSON.stringify(response.data))
                 Cookies.set('access',response.data.access_token)

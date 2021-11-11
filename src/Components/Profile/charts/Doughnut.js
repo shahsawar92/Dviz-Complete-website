@@ -1,12 +1,24 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const data = {
+
+const DoughnutChart = ({profileData}) => (
+  
+  <>
+  {console.log("profledata:",profileData)}
+   {profileData?.starter_plan_check && <div className="text-center pb-3 font-bold">You are currently subscribed to the Starter Plan</div>}
+   {profileData?.pro_plan_check && <div>You are currently subscribed to the Pro Plan</div>}
+   {profileData?.vip_plan_check && <div>You are currently subscribed to the Vip Plan</div>}
+   
+{console.log("starter plan check",profileData?.starter_plan_check)}
+{console.log("starter plan used",profileData?.grooves_used)}
+
+    <Doughnut data={{
   labels: ['Groves used', 'Groves Remaning'],
   datasets: [
     {
       
-      data: [12, 19, ],
+      data: [profileData?.grooves_used,profileData?.Grooves_Remaining],
       backgroundColor: [
         '#355070',
         '#6D597A',
@@ -20,12 +32,7 @@ const data = {
       borderWidth: 1,
     },
   ],
-};
-
-const DoughnutChart = () => (
-  <>
-   
-    <Doughnut data={data} 
+}} 
     options={{
       plugins: {
         legend: {

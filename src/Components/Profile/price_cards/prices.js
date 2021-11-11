@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import PayPal from '../paypal';
 import PaypalComponent from '../paypalComponent';
+import {useContexts} from '../../Context/context'
+import axios from 'axios';
 
 export default function Prices() {
-    const [counterVip, setCounterVip]=useState(0)
+    const [counterVip, setCounterVip]=useState(1)
     const [starterActive,setStarterActive]=useState(false)
     const [proActive,setproActive]=useState(false)
     const [vipActive,setvipActive]=useState(false)
@@ -13,15 +15,27 @@ export default function Prices() {
     const [showModal3, setShowModal3] = useState(false);
     const [addProGrooves,setaddProGroves]=useState(false)
     const [addVipGrooves,setaddVipGrooves]=useState(false);
+    const {profileData }=useContext(useContexts);
   const plan_id="P-8XC30638NN0098448MEE2UFI";
   const plan_id2="P-4FC00435N8891101MMEE2VYQ";
   const plan_id3="P-96A251586U560802XMEE2WQI";
   const plan_id_addPro="P-3UF088138S573254CMEXZAWY";
   const plan_id_addVip="P-944133830R0875825MEXZAAA";
-  
-  let starterPlan = false;
-  let proPlan = false;
-  let vipPlan = true;
+  let config = {
+    headers: {
+       'Content-Type': 'application/json'
+    }
+  }
+  const URL='https://shahbaz.dviz.tech/plansubscription/';
+  let starterPlan = profileData?.starter_plan_check;
+  let proPlan = profileData?.pro_plan_check;
+  let vipPlan = profileData?.vip_plan_check;
+//   const values={
+//       params:{
+//       'id':4,
+//       'username': 'rehman',
+//       'plan':'Starter' }
+//   }
   useEffect(()=>{
       if(starterPlan||proPlan||vipPlan){
       if(starterPlan){ setStarterActive(true); setvipActive(false);setproActive(false)}
@@ -32,6 +46,26 @@ export default function Prices() {
       }
   } ,[starterPlan, proPlan, vipPlan])
   
+  useEffect(()=>{
+    axios.post(URL, {
+        params: {
+            'id':4,
+            'username': 'rehman',
+             'plan':'Starter'
+        }
+    },config)
+    .then(response => {
+      console.log("response of login:",response);
+      if(response.status===200){
+          
+      }
+    })
+    .catch(error=>{
+        console.log("profile:",error);
+    })
+
+    
+  },[])
 console.log("proactive, vipactive, starteractive",proActive,vipActive,starterActive);
   //functions
     const handleClick=(e,props)=>{
