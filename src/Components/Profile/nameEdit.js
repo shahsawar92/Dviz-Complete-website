@@ -24,15 +24,17 @@ const handleSave= (e)=>{
     console.log("code:",dailCode);
      
 }
+
  let config = {
         headers: {
            'Content-Type': 'application/json'
         }
       }
       const URL='https://shahbaz.dviz.tech/update_info/';
+      console.log("props useranem:",props?.userInfo?.uName);
 const formik = useFormik({
     initialValues: {
-      user: props?.userInfo?.uName,
+      username: props?.userInfo?.uName,
       first_name:props?.userInfo?.fName,
       last_name:props?.userInfo?.lName,
       email:props?.userInfo?.email,
@@ -48,6 +50,7 @@ const formik = useFormik({
         console.log("myvalues",sendValues);
         axios.post(URL, sendValues ,config)
         .then(response => {
+           
             localStorage.setItem("profileUpdate",JSON.stringify(response.data))
             console.log('data response :',response.data);
         
@@ -74,7 +77,7 @@ const formik = useFormik({
                             id="user"
                             type="text"
                             readOnly
-                            {...formik.getFieldProps('user')}
+                            {...formik.getFieldProps('username')}
                         />
                           <label>First Name</label>
                           <input 
@@ -128,7 +131,7 @@ const formik = useFormik({
                     <button  onClick={handleBack} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
                         Back
                     </button>
-                    <input     className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}
+                    <input    onClick={handleBack}  className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}
                     form="myform" type="submit" value="save"
                     >
                         

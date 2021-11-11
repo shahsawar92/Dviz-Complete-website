@@ -36,10 +36,7 @@ export default function ProfileSecondry() {
                      "username":retrievedObject.user.username
                     }
                     console.log("data here:",data);
-        const myJSON = JSON.stringify(data);
         
-
-        const headers = { 'Content-Type': 'application/json' }
     
 
       //useeffect for profiledata
@@ -91,6 +88,7 @@ export default function ProfileSecondry() {
         lName:profileData.last_name,
         phone:profileData.phone_number
     }
+   
    
     const changePhoto=(e)=>{
         let newImage= new FileReader();

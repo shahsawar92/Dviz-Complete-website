@@ -113,7 +113,7 @@ const handleCounterplusPro=()=>{
         <div className="flex md:flex-row flex-col md:justify-evenly ">
     
         
-        <div  className={starterActive? "md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 border-red-600 ":(!vipActive && !proActive && !starterActive)?"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 ":"md:w-1/4 w-7/12 opacity-40 self-center my-6 bg-white shadow-xl border-t-2"}>
+        <div  className={starterActive? "md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 border-red-600 ":(!vipActive && !proActive && !starterActive)?"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 ":"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-t-2"}>
            <div className="flex flex-col py-4">
            <h1 className="self-center  text-xl">STARTER</h1>
                         <hr/>
@@ -122,7 +122,7 @@ const handleCounterplusPro=()=>{
                         <p className="text-lg font-semibold self-center pt-3 line-through">Extra Grooves : x</p>
                         <p className="text-lg font-semibold self-center pt-2 line-through ">Customization : x </p>
                         <h2 className="text-3xl font-semibold self-center pb-2 pt-4 ">$15</h2>
-                        <button className=" w-4/5  border-2 py-2 shadow-lg self-center rounded-lg hover:bg-gray-500"
+                        <button className= {vipActive || proActive?" w-4/5 self-center border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2":"bg-primeryClr text-white w-4/5 self-center border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2" }
                           onClick={(e)=>handleClick(e,'Starter')}
                           disabled={proActive || vipActive } 
                         >Subscribe</button>
@@ -133,7 +133,7 @@ const handleCounterplusPro=()=>{
             {/* end of first */}
             {/* 2nd */}
            
-            <div  className={proActive? "md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 border-red-600 ":(!vipActive && !proActive && !starterActive)?"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 ":"md:w-1/4 w-7/12 opacity-40 self-center my-6 bg-white shadow-xl border-t-2"}>
+            <div  className={proActive? "md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 border-red-600 ":(!vipActive && !proActive && !starterActive)?"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 ":"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-t-2"}>
            <div className="flex flex-col py-4">
 
            <h1 className="self-center text-xl">PRO</h1>
@@ -147,7 +147,7 @@ const handleCounterplusPro=()=>{
                         <span className={proActive?"self-center": "hidden"}
                         
                         id={"VipCounter"} ><button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterminusPro()}>-</button><span className="border-2 border-gray-800 py-2 px-4">{counterPro}</span> <button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterplusPro()}>+</button></span>
-                        <button className="border-2 w-4/5 py-2 shadow-lg self-center rounded-lg hover:bg-gray-500 "
+                        <button className= {starterActive || vipActive?" w-4/5 self-center border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2":"bg-primeryClr text-white w-4/5 self-center border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2" }
                         disabled={starterActive || vipActive }  
                         onClick={(e)=>handleClick(e,'Pro')}
                         >{proActive?"Add Grooves":"Subscribe"}</button>
@@ -158,7 +158,7 @@ const handleCounterplusPro=()=>{
             {/* end of second */}
             {/* start of 3rd */}
            
-            <div  className={vipActive? "md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 border-red-600 ":(!vipActive && !proActive && !starterActive)?"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 ":"md:w-1/4 w-7/12 opacity-40 self-center my-6 bg-white shadow-xl border-t-2"}>
+            <div  className={vipActive? "md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 border-red-600 ":(!vipActive && !proActive && !starterActive)?"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-2 ":"md:w-1/4 w-7/12  self-center my-6 bg-white shadow-xl border-t-2"}>
            <div className="flex flex-col py-4">
            <h1 className="self-center text-xl">VIP</h1>
                         <hr/>
@@ -171,7 +171,7 @@ const handleCounterplusPro=()=>{
                         <span className={vipActive?"self-center": "hidden"}
                         
                         id={"VipCounter"} ><button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterminus()}>-</button><span className="border-2 border-gray-800 py-2 px-4">{counterVip}</span> <button className="py-2 px-2 bg-gray-400 " onClick={()=>handleCounterplus()}>+</button></span>
-                        <button disabled={starterActive || proActive} className=" w-4/5 self-center border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2"
+                        <button disabled={starterActive || proActive} className= {starterActive || proActive?" w-4/5 self-center border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2":"bg-primeryClr w-4/5 self-center text-white border-2 shadow-lg rounded-lg hover:bg-gray-600 py-2" }
                          onClick={(e)=>handleClick(e,'Vip')}
                         >{vipActive?"Add Grooves":"Subscribe"}</button>
                    </div>

@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import axios from 'axios';
+import { useContexts } from "../Context/context";
 
 export default function PaypalComponent(props) {
+  const {profileData}=useContext(useContexts);
   const {setShowModal} = props;
 
   let config = {
@@ -36,7 +38,14 @@ export default function PaypalComponent(props) {
  
    onApprove: function(data, actions) {      
      console.log("response data of paypal:",data);
-     axios.post(URL, name ,config)
+     axios.post(URL, {
+      params: {
+          'id':profileData.id,
+          'username': profileData.username,
+           'plan':name,
+           'quantity':grooves_quantity
+      }
+  } ,config)
    .then(response => {
       
        console.log("response",response);
