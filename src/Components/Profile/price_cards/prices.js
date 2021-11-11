@@ -18,6 +18,7 @@ export default function Prices() {
     const [clickedPlanName,setPlanClickedName]=useState('')
     const {profileData }=useContext(useContexts);
     const [buttonClicked,setbuttonClicked]=useState(false);
+    
   const plan_id="P-8XC30638NN0098448MEE2UFI";
   const plan_id2="P-4FC00435N8891101MMEE2VYQ";
   const plan_id3="P-96A251586U560802XMEE2WQI";
@@ -35,20 +36,20 @@ export default function Prices() {
 
   useEffect(()=>{
       if(starterPlan||proPlan||vipPlan){
-      if(starterPlan){ setStarterActive(true); setvipActive(false);setproActive(false)}
-      if (proPlan ) { setStarterActive(false); setvipActive(false);setproActive(true)}
-      if (vipPlan )  { setStarterActive(false); setvipActive(true);setproActive(false)}
+      if(starterPlan){ setStarterActive(true); setvipActive(false);setproActive(false);setaddProGroves(false);setaddVipGrooves(false)}else
+      if (proPlan ) { setStarterActive(false); setvipActive(false);setproActive(true);setaddProGroves(false);setaddVipGrooves(false)}else
+      if (vipPlan )  { setStarterActive(false); setvipActive(true);setproActive(false);setaddProGroves(false);setaddVipGrooves(false)}
       }else{
-         setStarterActive(false); setvipActive(false);setproActive(false)
+         setStarterActive(false); setvipActive(false);setproActive(false);setaddProGroves(false);setaddVipGrooves(false)
       }
-  } ,[starterPlan, proPlan, vipPlan])
+  } ,[])
 
 
 //console.log("proactive, vipactive, starteractive",proActive,vipActive,starterActive);
   //functions
-    const handleClick=(e,props)=>{
+     const handleClick=(e,props)=>{
         console.log(e?.target?.innerText);
-        setbuttonClicked(true);
+        setbuttonClicked(!buttonClicked);
       
         setPlanClickedName(e?.target?.innerText);
         if(props==='Starter'){
@@ -59,14 +60,25 @@ export default function Prices() {
         if(props==='Pro'){
             
             if(e?.target?.innerText=="Add Grooves"){
+                setStarterActive(false);
+                 setvipActive(false);
+                setproActive(false);
+                setaddVipGrooves(false)
                 setaddProGroves(true);
+               
+
+
+
             }else
             setPlanClickedName("Pro")
             setShowModal2(true);
         }
         if(props==='Vip'){
             if(e?.target?.innerText=="Add Grooves"){
-
+                setStarterActive(false);
+                setproActive(false);
+                setaddVipGrooves(false)
+                setaddProGroves(true);
                 setaddVipGrooves(true);
             }else
             setPlanClickedName("Vip")
@@ -101,14 +113,15 @@ const handleCounterplusPro=()=>{
         }else
         setCounterPro(counterPro+1);
 }
+  
     return (
         <>
        
         {showModal &&<PayPal setShowModal={setShowModal} plan_id={plan_id} name={"Starter"}/>}
         {showModal2 &&<PayPal setShowModal={setShowModal2} plan_id={plan_id2} name={"Pro"}/>}
         {showModal3 &&<PayPal setShowModal={setShowModal3} plan_id={plan_id3} name={"Vip"}/>}
-        {addProGrooves &&<PaypalComponent setShowModal={setaddProGroves} plan_id={plan_id_addPro} name={"Pro"} grooves_quantity={counterPro}/>}
-        {addVipGrooves &&<PaypalComponent setShowModal={setaddVipGrooves} plan_id={plan_id_addVip} name={"Vip"} grooves_quantity={counterVip}/>}
+        {addProGrooves && <PaypalComponent setShowModal={setaddProGroves} plan_id={plan_id_addPro} name={"Pro"} grooves_quantity={counterPro} />}
+        {addVipGrooves && <PaypalComponent setShowModal={setaddVipGrooves} plan_id={plan_id_addVip} name={"Vip"} grooves_quantity={counterVip} />}
 
         <div className="flex md:flex-row flex-col md:justify-evenly ">
     

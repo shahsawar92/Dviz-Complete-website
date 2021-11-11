@@ -11,7 +11,7 @@ export default function PaypalComponent(props) {
       'Content-Type': 'application/json'
    }
  }
- const URL='#'
+ const URL='https://shahbaz.dviz.tech/addgrooves/'
   const {plan_id}=props
   console.log("planid",plan_id);
    const {name}=props
@@ -38,12 +38,12 @@ export default function PaypalComponent(props) {
  
    onApprove: function(data, actions) {      
      console.log("response data of paypal:",data);
-     axios.post(URL, {
+     axios.get(URL, {
       params: {
           'id':profileData.id,
           'username': profileData.username,
            'plan':name,
-           'quantity':grooves_quantity
+           'grooves_quantity':grooves_quantity
       }
   } ,config)
    .then(response => {

@@ -14,6 +14,7 @@ export default function ProfileSecondry() {
         console.log('retrievedObject: ', retrievedObject);
     const {profileImg,profileData,setProfileData} =useContext(useContexts);
     console.log("profile data ffrom context",profileData);
+    const [updateInfo,setupdateInfo]=useState(false);
     // const {profileImg, setProfileImg} = image;
     // const profile_image={
     //     'profile_image':""  
@@ -28,9 +29,6 @@ export default function ProfileSecondry() {
       const URL='https://shahbaz.dviz.tech/update/ProfileImage/'
       const URL_PROFILE="https://shahbaz.dviz.tech/profile_page/"
 
-    useEffect(() => {
-       
-        }, [])
 
        const data= { "id": retrievedObject.user.pk,
                      "username":retrievedObject.user.username
@@ -58,7 +56,7 @@ export default function ProfileSecondry() {
     }).catch(error=>{ console.log(error); }  ) 
    },
     
-    [])
+    [updateInfo])
   
         
       
@@ -103,7 +101,7 @@ export default function ProfileSecondry() {
 
     return (
         <div className="relative z-100">
-         <EditFrom display={display} setD={setDisplay} userInfo={userInfo}/>
+         <EditFrom display={display} setD={setDisplay} userInfo={userInfo} setupdateInfo={setupdateInfo} updateInfo={updateInfo}/>
          <TranscationHistory display={TransH} setD={setTrans} />
         <div className={" overflow-y-auto "}>
         <h1 className=" text-xl pb-2">Profile & account</h1>

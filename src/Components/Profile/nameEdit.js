@@ -50,7 +50,7 @@ const formik = useFormik({
         console.log("myvalues",sendValues);
         axios.post(URL, sendValues ,config)
         .then(response => {
-           
+            props.setupdateInfo(!props.updateInfo)
             localStorage.setItem("profileUpdate",JSON.stringify(response.data))
             console.log('data response :',response.data);
         
