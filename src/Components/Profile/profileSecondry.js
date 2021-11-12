@@ -24,23 +24,15 @@ export default function ProfileSecondry() {
       const URL='https://shahbaz.dviz.tech/update/ProfileImage/'
       const URL_PROFILE="https://shahbaz.dviz.tech/profile_page/"
 
-
-       const data= { "id": retrievedObject.user.pk,
-                     "username":retrievedObject.user.username
-                    }
-                    console.log("data here:",data);
-        
     
 
       //useeffect for profiledata
         useEffect(()=>{
-        //     fetch(URL_PROFILE, { headers })
-        // .then(response => response.json())
-        // .then(data => console.log("data of response",data));
+       
         axios.get(URL_PROFILE,{
             params: {
-                "id": retrievedObject.user.pk,
-                     "username":retrievedObject.user.username
+                "id": retrievedObject?.user?.pk,
+                     "username":retrievedObject?.user?.username
             }
         },config)
         .then(response => {

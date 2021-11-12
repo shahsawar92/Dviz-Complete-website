@@ -1,4 +1,4 @@
-import React, {  useContext} from 'react'
+import React, {  useContext, useEffect, useState} from 'react'
 import { Link ,useLocation} from 'react-router-dom';
 import * as ROUTES from '../../Constants/Routes'
 import {Icons_menu} from '../../Utilities/menu_icons';
@@ -6,15 +6,17 @@ import './style.css';
 import SecondryMenu from './secondryMenu';
 import {images} from '../../Utilities/Images'
 import { useContexts } from '../Context/context';
+import axios from 'axios';
 
 
 export default function Menu() {
 	//definitions
-	var retrievedObject = JSON.parse(localStorage.getItem('completeProfileData'));
+	var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
 	console.log('retrievedObject: ', retrievedObject);
 	const location = useLocation();
     const {toggle, setToggle, noOfNotifications} = useContext(useContexts);	
 	const userImage=useContext(useContexts);
+	const [userData,setuserData]=useState({})
 	// actions
     const handleClick= (e)=>{
     	setToggle(!toggle); 
@@ -37,6 +39,35 @@ const profileStyle={
 		paddingRight: "12px",
 		height:"373px"
 	};
+
+	let config = {
+        headers: {
+            'Content-Type': 'application/json'
+            
+        }
+      }
+      const URL_PROFILE="https://shahbaz.dviz.tech/profile_page/"
+
+    
+
+      //useeffect for profiledata
+        useEffect(()=>{
+       
+        axios.get(URL_PROFILE,{
+            params: {
+                "id": retrievedObject?.user?.pk,
+                     "username":retrievedObject?.user?.username
+            }
+        },config)
+        .then(response => {
+            if(response.status===200){
+				setuserData(response?.data?.response)
+			}
+        console.log('profile info response :',response);
+    }).catch(error=>{ console.log(error); }  ) 
+   },
+    
+    [1])
 	
     return (
         
@@ -68,10 +99,10 @@ const profileStyle={
 						<Link to={"/profile"}  className="" > 	
 							<img className={"ml-4 w-full"} style={profileStyle} src={userImage.profileImg} alt="profile"></img>
 							</Link>
-							<p className={"text-center text-gray-500 mr-1 text-xs"}>{retrievedObject.username}</p>
+							<p className={"text-center text-gray-500 mr-1 text-xs"}>{userData.username}</p>
 						</div>
 					
-						<div className={"text-center text-xs mr-1 text-gray-500"}>Grooves: {retrievedObject.Grooves_Remaining}</div>
+						<div className={"text-center text-xs mr-1 text-gray-500"}>Grooves: {userData.Grooves_Remaining}</div>
 					</div>
 				{/* 4 icons of menu  wrapper*/}
 
