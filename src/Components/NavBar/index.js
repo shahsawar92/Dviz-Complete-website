@@ -10,7 +10,7 @@ import { useContexts } from '../Context/context';
 
 export default function Menu() {
 	//definitions
-	var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
+	var retrievedObject = JSON.parse(localStorage.getItem('completeProfileData'));
 	console.log('retrievedObject: ', retrievedObject);
 	const location = useLocation();
     const {toggle, setToggle, noOfNotifications} = useContext(useContexts);	
@@ -68,10 +68,10 @@ const profileStyle={
 						<Link to={"/profile"}  className="" > 	
 							<img className={"ml-4 w-full"} style={profileStyle} src={userImage.profileImg} alt="profile"></img>
 							</Link>
-							<p className={"text-center text-gray-500 mr-1 text-xs"}>{retrievedObject.user.username}</p>
+							<p className={"text-center text-gray-500 mr-1 text-xs"}>{retrievedObject.username}</p>
 						</div>
 					
-						<div className={"text-center text-xs mr-1 text-gray-500"}> Grooves</div>
+						<div className={"text-center text-xs mr-1 text-gray-500"}>Grooves: {retrievedObject.Grooves_Remaining}</div>
 					</div>
 				{/* 4 icons of menu  wrapper*/}
 

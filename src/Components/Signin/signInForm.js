@@ -16,7 +16,7 @@ import {icons} from '../../Utilities/flow_icons'
    //sent to store
    const [isSubmitting, setSbumitting]=useState(false);
    const [errorMsg,setErrorMsg]=useState()
-  const {setloginInfo}= useContext(useContexts);
+  const {setloginInfo,updateInfoprofile,setupdateInfoprofile}= useContext(useContexts);
   let config = {
     headers: {
        'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ const history=useHistory();
               console.log("response of login:",response);
               if(response.status===200){
                 setSbumitting(false);
-                
+                setupdateInfoprofile(!updateInfoprofile)
                 localStorage.setItem("user",JSON.stringify(response.data.user))
                 localStorage.setItem("userdata",JSON.stringify(response.data))
                 Cookies.set('access',response.data.access_token)

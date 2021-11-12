@@ -16,7 +16,6 @@ function Store() {
         console.log("loging props:",props);
         setpopUpName(props);
         setVisiable(true);
-        
     }
    const cardData=useMemo(() => carData, carData) 
 

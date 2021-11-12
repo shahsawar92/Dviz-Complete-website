@@ -29,7 +29,8 @@ export const Globalprovider=({children})=>{
 // NO OF NOTIFICATIONS
     const [noOfNotifications,SetnoOfNotifications]=useState();
 
-
+    const [updateInfo,setupdateInfo]=useState(false)
+    const [updateInfoprofile,setupdateInfoprofile]=useState(false)
 
 
 // all actions:
@@ -85,7 +86,7 @@ function allCat(e){
 //return the wrapper 
     return (
         <useContexts.Provider value={{
-            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData
+            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData,updateInfo,setupdateInfo,updateInfoprofile,setupdateInfoprofile
         }}>
             {children}
         </useContexts.Provider>

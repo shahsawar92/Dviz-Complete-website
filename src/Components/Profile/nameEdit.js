@@ -11,6 +11,7 @@ export default function EditFrom(props) {
     }   
 const [countryFlag, setcountryFlag] = useState(icons.phoneIcon);
 const [dailCode, setdailCode]=useState("");
+const [userData,setuserData]=useState(props?.userInfo);
 
 var newFetch = JSON.parse(localStorage.getItem('user'));
 var pk=newFetch.pk;
@@ -34,11 +35,11 @@ const handleSave= (e)=>{
       console.log("props useranem:",props?.userInfo?.uName);
 const formik = useFormik({
     initialValues: {
-      username: props?.userInfo?.uName,
-      first_name:props?.userInfo?.fName,
-      last_name:props?.userInfo?.lName,
-      email:props?.userInfo?.email,
-      phone:props?.userInfo?.phone
+      username: userData?.uName,
+      first_name:userData?.fName,
+      last_name:userData?.lName,
+      email:userData?.email,
+      phone:userData?.phone
     },
 
     onSubmit:(values) => {
