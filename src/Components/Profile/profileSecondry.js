@@ -12,14 +12,9 @@ export default function ProfileSecondry() {
         //   Retrieve the object from storage
         var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
         console.log('retrievedObject: ', retrievedObject);
-    const {updateInfo,setupdateInfo,profileImg,profileData,setProfileData,updateInfoprofile} =useContext(useContexts);
+    const {updateInfo,setupdateInfo,profileImg,setProfileImg, profileData,setProfileData,updateInfoprofile} =useContext(useContexts);
     console.log("profile data ffrom context",profileData);
-    
-    // const {profileImg, setProfileImg} = image;
-    // const profile_image={
-    //     'profile_image':""  
-    // }
-
+  
     let config = {
         headers: {
             'Content-Type': 'application/json'
@@ -94,7 +89,7 @@ export default function ProfileSecondry() {
         let newImage= new FileReader();
         newImage.onload=()=>{
             if(newImage.readyState===2){
-                // setProfileImg(newImage.result);
+                setProfileImg(newImage.result);
             }
         }
         newImage.readAsDataURL(e.target.files[0]);
