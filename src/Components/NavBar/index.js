@@ -14,7 +14,7 @@ export default function Menu() {
 	var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
 	console.log('retrievedObject: ', retrievedObject);
 	const location = useLocation();
-    const {toggle, setToggle, noOfNotifications} = useContext(useContexts);	
+    const {toggle, setToggle, noOfNotifications,updateProfileDAta} = useContext(useContexts);	
 	const userImage=useContext(useContexts);
 	const [userData,setuserData]=useState({})
 	// actions
@@ -56,7 +56,7 @@ const profileStyle={
         axios.get(URL_PROFILE,{
             params: {
                 "id": retrievedObject?.user?.pk,
-                     "username":retrievedObject?.user?.username
+                "username":retrievedObject?.user?.username
             }
         },config)
         .then(response => {
@@ -67,7 +67,7 @@ const profileStyle={
     }).catch(error=>{ console.log(error); }  ) 
    },
     
-    [1])
+    [updateProfileDAta])
 	
     return (
         

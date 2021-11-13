@@ -1,5 +1,32 @@
 import { icons } from "../../Utilities/flow_icons"
-export const initial={
+import React, {  useEffect, useState } from 'react'
+import axios from "axios";
+
+
+    const DataStore = () => {
+        const [activeCard,setactiveCard]=useState({});
+
+    var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
+    console.log('retrievedObject: ', retrievedObject);
+   
+    let config = {
+        headers: {
+           'Content-Type': 'application/json'
+        }
+      }
+    const URL="https://shahbaz.dviz.tech/store/";
+    //get dashboard data
+   useEffect(()=>{
+       
+    axios.get(URL,{
+        params: {
+            "id": retrievedObject?.user?.pk,
+            "username":retrievedObject?.user?.username
+    }
+        },config).then((res)=>{
+            console.log("response of store",res);})
+   },[1])
+ const initial={
     carData:[
            {flowName: "Cars",
            badge:["Content" , "Outreach" ],
@@ -102,6 +129,9 @@ export const initial={
        {
               flowName: "Youtube",
               flowRef:"Youtube_Content",
+              youtube_check:"",
+              youtube_dashboard:""
+
           },
           {
            flowName: "Facebook",
@@ -255,3 +285,12 @@ export const initial={
        
       ]
 } 
+
+return (
+    
+     {initial}   
+
+    )
+}
+
+export default DataStore;

@@ -1,12 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useContexts } from '../Context/context';
-import {Redirect, useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import Card from '../Card/card';
 import './style.css';
+import axios from 'axios';
+
 function Dashboard() {
-    const {Dashboard_card}=useContext(useContexts);
+    const {Dashboard_card,setDashboard_card}=useContext(useContexts);
+
+    
     const history=useHistory();
     console.log(Dashboard_card);
+    var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
+    console.log('retrievedObject: ', retrievedObject);
     const handleClick=(e)=>{      
         if(e[0].toLowerCase()==="email validation" && e[1].toLowerCase()==="email_growth"){
             history.push("/emailvalidation")}
@@ -15,6 +21,7 @@ function Dashboard() {
         } 
     }
 
+   
    
     return (
       <div className={"flex flex-rows  flex-column-fluid pt-10 w-full  h-full "}>

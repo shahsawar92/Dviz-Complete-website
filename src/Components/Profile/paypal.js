@@ -14,7 +14,7 @@ export default function PayPal(props) {
    console.log("planid",plan_id);
     const {name}=props
     console.log("name of pkg:",name);
-    const {profileData}=useContext(useContexts);
+    const {profileData,updateProfileDAta,setupdateProfileData}=useContext(useContexts);
     // const callAxios=()=>{
     //   
   
@@ -38,7 +38,10 @@ export default function PayPal(props) {
   
     },
   
-    onApprove: function(data, actions) {      
+    onApprove: function(data, actions) { 
+      //will update grooves on navbar  
+      setupdateProfileData(!updateProfileDAta);
+   
       console.log("response data of paypal:",data);
     //   axios.post(URL, name ,config)
     // .then(response => {

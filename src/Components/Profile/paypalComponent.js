@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useContexts } from "../Context/context";
 
 export default function PaypalComponent(props) {
-  const {profileData}=useContext(useContexts);
+  const {profileData,updateProfileDAta,setupdateProfileData}=useContext(useContexts);
   const {setShowModal} = props;
 
   let config = {
@@ -36,7 +36,9 @@ export default function PaypalComponent(props) {
  
    },
  
-   onApprove: function(data, actions) {      
+   onApprove: function(data, actions) {    
+       //will update grooves on navbar  
+       setupdateProfileData(!updateProfileDAta);  
      console.log("response data of paypal:",data);
      axios.get(URL, {
       params: {

@@ -37,7 +37,7 @@ export default function ProfileSecondry() {
         },config)
         .then(response => {
             if(response.status===200){
-                setupdateInfo(true);
+                setupdateInfo(!updateInfo);
                 setProfileData(response?.data?.response)
                 localStorage.setItem("completeProfileData",JSON.stringify(response?.data?.response))
             }

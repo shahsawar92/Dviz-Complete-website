@@ -1,14 +1,17 @@
 import React, {createContext,useState,useEffect } from "react";
 import {images } from '../../Utilities/Images'
-import { initial } from "./dataStore";
+import DataStore from "./dataStore";
 import {notificationData } from './notificationsData';
-
+ 
+   
+const {initial}=DataStore();
 //global context
-export const useContexts=createContext(initial);  
-
+export const useContexts=createContext(initial); 
 
 //create global context provider wrapper
 export const Globalprovider=({children})=>{
+
+ 
 // we will store login information
     const [loginInfo,setloginInfo]=useState(localStorage.getItem('user'));
 //state for DATA on STORE-secondry menu
@@ -28,9 +31,12 @@ export const Globalprovider=({children})=>{
     const [Dashboard_card, setDashboard_card]=useState([]);
 // NO OF NOTIFICATIONS
     const [noOfNotifications,SetnoOfNotifications]=useState();
+    const[updateProfileDAta,setupdateProfileData]=useState(false);
 
     const [updateInfo,setupdateInfo]=useState(false)
     const [updateInfoprofile,setupdateInfoprofile]=useState(false)
+    //state for response of store activated cards
+   
 
 
 // all actions:
@@ -86,7 +92,7 @@ function allCat(e){
 //return the wrapper 
     return (
         <useContexts.Provider value={{
-            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData,updateInfo,setupdateInfo,updateInfoprofile,setupdateInfoprofile
+            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData,updateInfo,setupdateInfo,updateInfoprofile,setupdateInfoprofile,updateProfileDAta,setupdateProfileData
         }}>
             {children}
         </useContexts.Provider>

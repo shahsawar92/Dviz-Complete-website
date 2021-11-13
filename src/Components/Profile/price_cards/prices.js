@@ -52,7 +52,7 @@ useEffect(()=>{
 
     if (vipPlan )  { setStarterActive(false); setvipActive(true);setproActive(false)}
 
-  } ,[updateInfo])
+  } ,[])
 
 
 //console.log("proactive, vipactive, starteractive",proActive,vipActive,starterActive);
