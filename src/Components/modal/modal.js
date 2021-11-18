@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import { useContexts } from '../Context/context';
 import { icons } from '../../Utilities/flow_icons';
 import './style.css'
@@ -7,6 +7,7 @@ import axios from 'axios';
 
 
 export default function Model(props) {
+    const history= useHistory();
     const {popUpData,setDashboard_data }=useContext(useContexts);
     var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
       console.log('retrievedObject: ', retrievedObject);
@@ -23,7 +24,10 @@ export default function Model(props) {
       }
     const [useEffectToggle,setuseEffectToggle]=useState(false);
     
-
+      //launch flow function to launch directly from dashboard
+      const launchFlow=()=>{
+        history.push("/"+popUpData?.popUpData[0]?.flowLink)
+      }
         const handleBack=()=>{
         props.setVisiable(false);
     } 
@@ -96,12 +100,23 @@ export default function Model(props) {
                     <button  onClick={handleBack} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
                         Back
                     </button>
+                    { !popUpData?.popUpData[0]?.checkDashboard &&
                     <Link to={"/dashboard"}><button  onClick={handleFunction} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
                         Add to Dashboard
-                    </button></Link>
+                    </button></Link>}
+                   { popUpData?.popUpData[0]?.checkDashboard &&
+                   <Link to={"/dashboard"}><button  onClick={handleFunction} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
+                       Remove from dashboard
+                    </button></Link>}
+                    {   !popUpData?.popUpData[0]?.checkActivate &&
                     <button  onClick={handleBack} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
                         Activate
-                    </button>                    
+                    </button> }  
+                    {   popUpData?.popUpData[0]?.checkActivate && ( 
+                    <button  onClick={launchFlow} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
+                        Launch
+                    </button>  )
+                }                   
                 </div>
             </div>:
             <div className={"animated fadeInUp fixed min-w-lg  md:relative pin-b pin-x align-top m-auto justify-end md:justify-center p-8  md:rounded md:h-auto md:shadow flex flex-col bg-white   rounded shadow-lg mx-7 opacity-100"}> 

@@ -11,6 +11,9 @@ export const useContexts=createContext(initial);
 //create global context provider wrapper
 export const Globalprovider=({children})=>{
 
+    //fetch data for active in active card
+
+
  
 // we will store login information
     const [loginInfo,setloginInfo]=useState(localStorage.getItem('user'));
@@ -89,6 +92,7 @@ function allCat(e){
         setstate( {carData:initial.carData.filter(car => car.badge.includes("Outreach"))});
     }
 
+    
 //return the wrapper 
     return (
         <useContexts.Provider value={{

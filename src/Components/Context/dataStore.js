@@ -4,28 +4,8 @@ import axios from "axios";
 
 
     const DataStore = () => {
-        const [activeCard,setactiveCard]=useState({});
-
-    var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
-    console.log('retrievedObject: ', retrievedObject);
-   
-    let config = {
-        headers: {
-           'Content-Type': 'application/json'
-        }
-      }
-    const URL="https://shahbaz.dviz.tech/store/";
-    //get dashboard data
-   useEffect(()=>{
-       
-    axios.get(URL,{
-        params: {
-            "id": retrievedObject?.user?.pk,
-            "username":retrievedObject?.user?.username
-    }
-        },config).then((res)=>{
-            console.log("response of store",res);})
-   },[1])
+        var cardCheck = JSON.parse(localStorage.getItem('cardCheck'));
+        console.log("cardcheck",cardCheck);
  const initial={
     carData:[
            {flowName: "Cars",
@@ -140,6 +120,8 @@ import axios from "axios";
        {
            flowName: "Linkedin",
            flowRef:"Linkedin_Content",
+           checkDashboard:cardCheck.linkedincontent_dashboard,
+           checkActivate: cardCheck.linkedincontent_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Upload a List - LinkedIn URLs"],
@@ -151,6 +133,8 @@ import axios from "axios";
        {
            flowName: "Channels",
            flowRef:"Channel_Content",
+           checkDashboard:cardCheck.cars_dashboard,
+           checkActivate: cardCheck.cars_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:[],
@@ -166,6 +150,8 @@ import axios from "axios";
        {
            flowName: "Cars",
            flowRef:"Car_Content",
+           checkDashboard:cardCheck.cars_dashboard,
+           checkActivate: cardCheck.cars_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Autotrader","Cargurus","eBay","Facebook Marketplace"],
@@ -178,6 +164,8 @@ import axios from "axios";
        {
            flowName: "Costum CRM",
            flowRef:"Costum_Content",
+           checkDashboard:cardCheck.customcrm_dashboard,
+           checkActivate: cardCheck.customcrm_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["TeacherOn Lebanon","TeacherOn UAE","MyPrivateTutor Dubai","MyPrivateTutor Sharjah","MyPrivateTutor Abu-Dhabi","Dubizzle","Kargal","Locanto","OLX-Lebanon"],
@@ -192,6 +180,9 @@ import axios from "axios";
        {
            flowName: "Email Validation",
            flowRef:"Email_Growth",
+           flowLink:"emailvalidation",
+           checkDashboard:cardCheck.emailvalidation_dashboard,
+           checkActivate: cardCheck.emailvalidation_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Upload a List - Emails","Enter Emails"],
@@ -207,6 +198,8 @@ import axios from "axios";
        {
            flowName: "News Feed",
            flowRef:"NewsFeed_Content",
+           checkDashboard:cardCheck.newsfeed_dashboard,
+           checkActivate: cardCheck.newsfeed_check,
            NoOFGroovs: 1,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Enter Keywords"],
@@ -218,6 +211,8 @@ import axios from "axios";
        {
            flowName: "Instagram",
            flowRef:"Instagram_Content",
+           checkDashboard:cardCheck.instagram_dashboard,
+           checkActivate: cardCheck.instagram_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Connect Instagram"],
@@ -233,6 +228,8 @@ import axios from "axios";
        {
            flowName: "Linkedin",
            flowRef:"Linkedin_Outreach",
+           checkDashboard:cardCheck.linkedinoutreach_dashboard,
+           checkActivate: cardCheck.linkedinoutreach_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Upload a List - LinkedIn URLs","Compose a message"],
@@ -244,6 +241,9 @@ import axios from "axios";
        {
            flowName: "PhoneValidation",
            flowRef:"Phone_Growth",
+           flowLink:"phonevalidation",
+           checkDashboard:cardCheck.phonevalidation_dashboard,
+           checkActivate: true,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Upload a List - Phone Numbers","Enter Phone"],
@@ -255,6 +255,9 @@ import axios from "axios";
        {
            flowName: "Places",
            flowRef:"Places_Content",
+           flowLink:"placescontent",
+           checkDashboard:cardCheck.places_dashboard,
+           checkActivate: cardCheck.places_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Provide Places Details"],
@@ -274,6 +277,10 @@ import axios from "axios";
        {
            flowName: "Telegram",
            flowRef:"Telegram_Content",
+           flowLink:"telegramcontent",
+           checkDashboard:cardCheck.telegram_dashboard,
+           checkActivate: true,
+        //    cardCheck.telegram_check
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:["Connect Telegram"],
