@@ -120,6 +120,7 @@ import axios from "axios";
        {
            flowName: "Linkedin",
            flowRef:"Linkedin_Content",
+           flowLink:"linkedincontent",
            checkDashboard:cardCheck.linkedincontent_dashboard,
            checkActivate: cardCheck.linkedincontent_check,
            NoOFGroovs: 3,
@@ -133,6 +134,7 @@ import axios from "axios";
        {
            flowName: "Channels",
            flowRef:"Channel_Content",
+           flowLink:"youtubechannels",
            checkDashboard:cardCheck.cars_dashboard,
            checkActivate: cardCheck.cars_check,
            NoOFGroovs: 3,
@@ -150,6 +152,7 @@ import axios from "axios";
        {
            flowName: "Cars",
            flowRef:"Car_Content",
+           flowLink:"cars",
            checkDashboard:cardCheck.cars_dashboard,
            checkActivate: cardCheck.cars_check,
            NoOFGroovs: 3,
@@ -162,8 +165,9 @@ import axios from "axios";
        },
        
        {
-           flowName: "Costum CRM",
-           flowRef:"Costum_Content",
+           flowName: "Custom CRM",
+           flowRef:"Custom_Content",
+           flowLink:"customcrm",
            checkDashboard:cardCheck.customcrm_dashboard,
            checkActivate: cardCheck.customcrm_check,
            NoOFGroovs: 3,
@@ -198,6 +202,7 @@ import axios from "axios";
        {
            flowName: "News Feed",
            flowRef:"NewsFeed_Content",
+           flowLink:"newsfeed",
            checkDashboard:cardCheck.newsfeed_dashboard,
            checkActivate: cardCheck.newsfeed_check,
            NoOFGroovs: 1,
@@ -211,6 +216,7 @@ import axios from "axios";
        {
            flowName: "Instagram",
            flowRef:"Instagram_Content",
+           flowLink:"instagram",
            checkDashboard:cardCheck.instagram_dashboard,
            checkActivate: cardCheck.instagram_check,
            NoOFGroovs: 3,
@@ -228,6 +234,7 @@ import axios from "axios";
        {
            flowName: "Linkedin",
            flowRef:"Linkedin_Outreach",
+           flowLink:"linkedinoutreach",
            checkDashboard:cardCheck.linkedinoutreach_dashboard,
            checkActivate: cardCheck.linkedinoutreach_check,
            NoOFGroovs: 3,
@@ -255,7 +262,7 @@ import axios from "axios";
        {
            flowName: "Places",
            flowRef:"Places_Content",
-           flowLink:"placescontent",
+           flowLink:"places",
            checkDashboard:cardCheck.places_dashboard,
            checkActivate: cardCheck.places_check,
            NoOFGroovs: 3,
@@ -277,7 +284,7 @@ import axios from "axios";
        {
            flowName: "Telegram",
            flowRef:"Telegram_Content",
-           flowLink:"telegramcontent",
+           flowLink:"telegram",
            checkDashboard:cardCheck.telegram_dashboard,
            checkActivate: true,
         //    cardCheck.telegram_check

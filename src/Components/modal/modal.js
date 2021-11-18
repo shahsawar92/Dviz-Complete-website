@@ -57,7 +57,7 @@ export default function Model(props) {
                 </svg>
                 </div>
                 {/* discription  */}
-                <div className={"w-full flex flex-col md:flex-row md:h-96    "}> 
+                <div className={"w-full flex flex-col md:flex-row md:h-96"}> 
                      {/* first */}
                     <div className="px-16 pb-7 lg:pb-16 ">
                         <div className="w-24 h-24 py-8 my-5 border-4 border-red-400 rounded-full text-center">P</div>
