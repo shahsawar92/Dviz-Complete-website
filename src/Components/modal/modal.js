@@ -16,12 +16,18 @@ export default function Model(props) {
            'Content-Type': 'application/json'
         }
       }
-      const URL='#';
-      const values={
+      const URL_to_activate='#';
+      const url_to_addToDashboard='#';
+      const values_to_activate={
           'access_token':retrievedObject.access_token,
           'flowName':popUpData?.popUpData[0]?.flowName,
           'flowRef':popUpData?.popUpData[0]?.flowRef
       }
+      const values_to_addToDashboard={
+        'access_token':retrievedObject.access_token,
+        'flowName':popUpData?.popUpData[0]?.flowName,
+        'flowRef':popUpData?.popUpData[0]?.flowRef
+    }
     const [useEffectToggle,setuseEffectToggle]=useState(false);
     
       //launch flow function to launch directly from dashboard
@@ -34,16 +40,20 @@ export default function Model(props) {
     const handleFunction=()=>{
         setuseEffectToggle(!useEffectToggle);
     }
-    const fetchData= ()=>{
-        axios.post(URL, values,config)
-        .then(response => {console.log(response);})
-        .catch(error=>{console.log(error)})
-        setDashboard_data([]);
+    const fetchData= (url,values)=>{
+        axios.post(url, values,config)
+        .then(res=>{return res})
+        .catch(err=>{return err})
     }
-
+// call to fetch data for add to dashboard 
     useEffect(()=>{
-       fetchData();
+      const activateCheck= fetchData(URL_to_activate,values_to_activate);
     },[useEffectToggle])
+
+// call to fetch data for add to dashboard 
+    useEffect(()=>{
+      const addToDashboardcheck=  fetchData(url_to_addToDashboard,values_to_addToDashboard);
+     },[useEffectToggle])
     
     return (
         <div className={` bg-black md-effect-1 anim animated fadeIn fixed w-screen z-50 pin overflow-auto bg-smoke-dark bg-opacity-90    inset-0  ${props.visiable? "flex":"hidden"} justify-center items-center`} >
