@@ -13,7 +13,8 @@ export const Globalprovider=({children})=>{
 
     //fetch data for active in active card
 
-
+    var cardDataCheck = JSON.parse(localStorage.getItem('cardCheck'));
+    console.log('cardDataCheck: ', cardDataCheck);
  
 // we will store login information
     const [loginInfo,setloginInfo]=useState(localStorage.getItem('user'));
@@ -30,7 +31,7 @@ export const Globalprovider=({children})=>{
     //profile info object overAll
     const [profileData,setProfileData]=useState({});
    //data of dashboard will be sotred here
-    const [Dashboard_data, setDashboard_data]=useState("");
+    const [Dashboard_data, setDashboard_data]=useState(cardDataCheck);
     const [Dashboard_card, setDashboard_card]=useState([]);
 // NO OF NOTIFICATIONS
     const [noOfNotifications,SetnoOfNotifications]=useState();
@@ -52,11 +53,11 @@ SetnoOfNotifications(notificationData.length)
 
 //set cards to dashboard and insure no duplicate entry there.
 useEffect(() => {
-    const filteredCard=(initial.carData.filter(card => (card.flowName===Dashboard_data[0] && card.flowRef===Dashboard_data[1])))
+    const filteredCard=(initial.carData.filter(card => (card.checkDashboard===true)))
     
      setDashboard_card(Array.from(new Set([...Dashboard_card,...filteredCard])))
 
-}, [Dashboard_data])
+}, [1])
 
 // set popup data when clicked on a card inside the store
  useEffect(() => {

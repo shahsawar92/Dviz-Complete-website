@@ -16,19 +16,25 @@ export default function Model(props) {
            'Content-Type': 'application/json'
         }
       }
-      const URL_to_activate='#';
-      const url_to_addToDashboard='#';
-      const values_to_activate={
-          'access_token':retrievedObject.access_token,
-          'flowName':popUpData?.popUpData[0]?.flowName,
-          'flowRef':popUpData?.popUpData[0]?.flowRef
-      }
-      const values_to_addToDashboard={
-        'access_token':retrievedObject.access_token,
-        'flowName':popUpData?.popUpData[0]?.flowName,
-        'flowRef':popUpData?.popUpData[0]?.flowRef
-    }
+      const URL_to_activate='https://shahbaz.dviz.tech/addflow/';
+      const url_to_addToDashboard='https://shahbaz.dviz.tech/addflow/';
+    //   const values_to_activate={
+    //       'access_token':retrievedObject.access_token,
+    //       'flowName':popUpData?.popUpData[0]?.flowName,
+    //       'flowRef':popUpData?.popUpData[0]?.flowRef
+    //   }
+      //const values_to_addToDashboard={
+        // 'username':'rehman',
+        // 'id':4,
+        // 'flowName':popUpData?.popUpData[0]?.flowName,
+        // 'flowRef':popUpData?.popUpData[0]?.flowRef,
+        // 'dashboardMessage':'Add to Dashboard',
+    //}
+  
     const [useEffectToggle,setuseEffectToggle]=useState(false);
+    const [toggle,settoggle]=useState(false);
+     const [dashbaordMsg, setdashbardMsg] = useState("")
+    
     
       //launch flow function to launch directly from dashboard
       const launchFlow=()=>{
@@ -37,26 +43,47 @@ export default function Model(props) {
         const handleBack=()=>{
         props.setVisiable(false);
     } 
-    const handleFunction=()=>{
-        setuseEffectToggle(!useEffectToggle);
+    const handleFunction=(e)=>{
+        setdashbardMsg(e.target.innerText)
+        settoggle(true)
+       setuseEffectToggle(!useEffectToggle)
     }
-    const fetchData= (url,values)=>{
-        axios.post(url, values,config)
-        .then(res=>{return res})
-        .catch(err=>{return err})
-    }
+    //remove from dashboard ftn
+    
+    // const fetchData= (url,values)=>{
+      
+    // }
 // call to fetch data for add to dashboard 
-    useEffect(()=>{
-      const activateCheck= fetchData(URL_to_activate,values_to_activate);
-    },[useEffectToggle])
+    // useEffect(()=>{
+    //   const activateCheck= fetchData(URL_to_activate,values_to_activate);
+    //   console.log("loging:",activateCheck);
+    // },[useEffectToggle])
 
 // call to fetch data for add to dashboard 
     useEffect(()=>{
-      const addToDashboardcheck=  fetchData(url_to_addToDashboard,values_to_addToDashboard);
+        console.log("running useeffect");
+       if(toggle){
+        console.log("inside if condition running");
+        axios.get(url_to_addToDashboard, 
+             {
+       params:{
+            'username':'rehman',
+            'id':4,
+            'flowName':popUpData?.popUpData[0]?.flowName,
+            'flowRef':popUpData?.popUpData[0]?.flowRef,
+            'dashboardMessage':dashbaordMsg,
+        }
+    },config)
+        .then(res=>{console.log("response of addtodb",res); settoggle(false); 
+        history.push("/dashboard");
+    })
+        .catch(err=>{console.log("response of addtodb",err); settoggle(false);})}
+    //   const addToDashboardcheck=  fetchData(url_to_addToDashboard,values_to_addToDashboard);
+    //   console.log("loging response of add to db",addToDashboardcheck);
      },[useEffectToggle])
     
     return (
-        <div className={` bg-black md-effect-1 anim animated fadeIn fixed w-screen z-50 pin overflow-auto bg-smoke-dark bg-opacity-90    inset-0  ${props.visiable? "flex":"hidden"} justify-center items-center`} >
+        <div className={` bg-black md-effect-1 anim animated fadeIn fixed w-screen z-50 pin overflow-auto bg-smoke-dark bg-opacity-90 inset-0  ${props.visiable? "flex":"hidden"} justify-center items-center`} >
         {popUpData?.popUpData[0]?.NoOFGroovs ? 
           <div className={"animated fadeInUp fixed min-w-lg Mcss md:relative pin-b pin-x align-top m-auto justify-end md:justify-center p-8  md:rounded md:h-auto md:shadow flex flex-col bg-white   rounded shadow-lg mx-7 opacity-100"}>
                 {/* header */}
@@ -111,13 +138,13 @@ export default function Model(props) {
                         Back
                     </button>
                     { !popUpData?.popUpData[0]?.checkDashboard &&
-                    <Link to={"/dashboard"}><button  onClick={handleFunction} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
+                    <button  onClick={e=>handleFunction(e)} className={"bg-primeryClr rounded h-12 text-white px-4 m-2"}>
                         Add to Dashboard
-                    </button></Link>}
+                    </button>}
                    { popUpData?.popUpData[0]?.checkDashboard &&
-                   <Link to={"/dashboard"}><button  onClick={handleFunction} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
-                       Remove from dashboard
-                    </button></Link>}
+                   <button onClick={e=>handleFunction(e)}   className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
+                       Remove from Dashboard
+                    </button>}
                     {   !popUpData?.popUpData[0]?.checkActivate &&
                     <button  onClick={handleBack} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
                         Activate

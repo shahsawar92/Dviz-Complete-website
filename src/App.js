@@ -14,7 +14,8 @@ import  {
       NotificationsRoute, 
       EmailValidationRoute,
       PhoneValidationRoute,
-      InstagramRoute
+      InstagramRoute,
+      CarsRoute
 
 } from './Routes';
 import ProtectedRoute from './protectedRoutes';
@@ -55,13 +56,15 @@ function App() {
       {/* route to instagram flow */}
       <ProtectedRoute path={"/instagram"} component={InstagramRoute}/>
 
+      <ProtectedRoute path={"/cars"} component={CarsRoute}/>
+
 
       <Route path={ROUTES.SIGN_UP} component={SignUp} />
       <Route path={ROUTES.PASSWORD_FORGET} component={ForgetPwd}/>
       <Route path={"/ForgetPassword/emailsent"} component={EmailSent} exact/>
       <Route path={"/resetPassword"} component={ResetPassword} exact />
       <Route path={"/resetPassword/passwordchanged"} component={PasswordChanged} exact />
-    
+      
 
       <Route path="*">
            <Page404 />

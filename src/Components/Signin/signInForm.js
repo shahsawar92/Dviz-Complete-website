@@ -14,7 +14,7 @@ import {icons} from '../../Utilities/flow_icons'
 
 
 
-const Card_Check_URL="https://shahbaz.dviz.tech/store/";
+
 //     //get dashboard data
 
  
@@ -53,14 +53,7 @@ const history=useHistory();
               console.log("response of login:",response);
               if(response.status===200){
                 setSbumitting(false);
-                axios.get(Card_Check_URL,{
-                          params: {
-                              "id": response.data.user.pk,
-                              "username":response.data.user.username
-                      }
-                          },config).then((res)=>{
-                            localStorage.setItem("cardCheck",JSON.stringify(res.data))
-                            })
+               
                     
                 setupdateInfoprofile(!updateInfoprofile)
                 localStorage.setItem("user",JSON.stringify(response.data.user))

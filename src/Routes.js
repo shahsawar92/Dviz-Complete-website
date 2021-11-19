@@ -8,6 +8,8 @@ import LogOut from './Components/Logout';
 import EmailValidation from "./Components/AllFlows/EmailValidationFlow";
 import PhoneValidation from "./Components/AllFlows/PhoneValidationFlow";
 import InstagramFlow from "./Components/AllFlows/Instagram";
+import Cars from "./Components/AllFlows/CarsFlow";
+import SecondryMenu_Cars from "./Components/AllFlows/CarsFlow/secondryMenu";
 //setting pages for simple routes!
 
 //profile route
@@ -111,6 +113,19 @@ export const InstagramRoute = () => {
         <div className={"lg:w-1/4  menuFix  fixed"}> <Menu /> </div>
         </div> 
         <div  className="lg:w-3/4 w-full appWidth "> <InstagramFlow /> </div>
+      </div>
+    )
+}
+
+//cars route
+
+export const CarsRoute = () => {
+    return (
+        <div className="flex "> 
+        <div className="relative lg:w-1/4 overflow-y-hidden">
+        <div className={"lg:w-1/4  menuFix  fixed"}> <Menu /> </div>
+        </div> 
+        <div  className="lg:w-3/4 w-full appWidth "> <Cars /> </div>
       </div>
     )
 }

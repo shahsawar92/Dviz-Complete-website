@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import SecondryMenu_EmailValidation from '../AllFlows/EmailValidationFlow/secondryMenu';
 import SecondryMenu_PhoneValidation from '../AllFlows/PhoneValidationFlow/secondryMenu';
 import SecondryMenuInstagram from '../AllFlows/Instagram/secondryMenu';
+import SecondryMenu_Cars from '../AllFlows/CarsFlow/secondryMenu';
 
 
 export default function SecondryMenu(props) {
@@ -85,16 +86,17 @@ export default function SecondryMenu(props) {
             {/*phone validation*/}
             {props.stateName==='/phonevalidation' && <div className="pt-14 pl-4 lg:w-full bg-white">
                <SecondryMenu_PhoneValidation />  
-               </div>
-           
-           }
+               </div>}
 
             {/*phone validation*/}
             {props.stateName==='/instagram' && <div className="pt-14 pl-4 lg:w-full bg-white">
                <SecondryMenuInstagram />  
-               </div>
-           
-           }
+               </div> }
+
+           {/*phone validation*/}
+           {props.stateName==='/cars' && <div className="pt-14 pl-4 lg:w-full bg-white">
+               <SecondryMenu_Cars />  
+               </div>}
         
      
    </> )

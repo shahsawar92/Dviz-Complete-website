@@ -1,19 +1,23 @@
-import React, { useRef,useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './style.css';
-export default function SecondryMenu_PhoneValidation() {
+export default function SecondryMenu_Cars() {
     const ref = useRef()
-    const [ExtentionValue,SetExtensionValue]=useState(false)
+        const [ExtentionValue,SetExtensionValue]=useState(false)
 
     const handleFileChange=(e)=>{
         e.preventDefault();
         const output= document.getElementById("uploadFile");
-        output.value=ref.current.files[0].name
-       
+        console.log("inserting file:",ref.current.files[0].name);
         if (!hasExtension(ref.current.files[0].name, ['.docx','.doc'])) {
             SetExtensionValue(true);
         }else{
             SetExtensionValue(false)
         }
+        
+        output.value=ref.current.files[0].name
+        // console.log(`Selected file - ${
+        //     ref.current.files[0].name
+        //   }`);
     }
     function hasExtension(inputID, exts) {
         console.log("testing file:",inputID);
@@ -27,31 +31,33 @@ export default function SecondryMenu_PhoneValidation() {
             alert("are you sure to submit")
         }
     }
-   
     return (
-        <div className="w-5/6 overflow-y-auto  ">
-           <h1 className="text-primeryClr text-3xl font-bold"> Phone Validation</h1>
+        <div className="w-5/6 overflow-y-auto ">
+           <h1 className="text-primeryClr text-3xl font-bold"> Cars</h1>
 
-           <textarea name="emailValidation" id="emailValidation" cols="30" rows="10" className="border-2 mt-4 p-4 w-11/12 textareaemail" placeholder={`Paste Phone Numbers here seperated by comma ','`}></textarea>
 
-           <h3 className="text-primeryClr fontsemibold mt-3 text-base">Please upload list indicating column Phone Numbers.</h3>
-          
-            
-  
-                    
+           <h3 className="text-primeryClr fontsemibold mt-3 text-base">Cars
+Start a new search or look through previous searches</h3>
+
+<select name="previous_search"  className={"text-center  rounded py-1 mb-3 form-select block w-full p-3 border border-gray-300  text-gray-600  bg-transparent  z-0"} >
+                <option value="nodata">USA</option>
+            </select>
                     <div className="mb-2"> 
                         <div className="relative w-11/12 h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer">
                             <div className="absolute">
                                 <div className="flex flex-col items-center "><span className="block text-gray-400 font-normal">Attach you file here</span> <span className="block text-gray-400 font-normal">or</span> <span className="block text-blue-400 font-normal">Browse file</span> </div>
-                                <input id="uploadFile" className= {`text-center ${ExtentionValue? `bg-red-700`:''}`} placeholder="No File chosen" disabled="disabled" />
+                                <input id="uploadFile" value="" className= {`text-center ${ExtentionValue? `bg-red-700`:''}`} placeholder="No File choosen" disabled="disabled" />
                             </div> <input type="file" ref={ref} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="h-full w-full opacity-0" onChange={handleFileChange} />
                             
                         </div>
-
-                        <div className={`flex w-11/12 justify-center text-center text-gray-400 ${ExtentionValue? `bg-red-600`:'bg-white'}`}> <span>Accepted file type:.csv, .xlxs only</span>  </div>
+                        <div className={`flex w-11/12 justify-center text-center text-gray-400 ${ExtentionValue? `bg-red-600`:'bg-white'}`}> Accepted file type:.csv, .xlxs only</div>
                     </div>
-                    <div className="mt-3  pb-3"> <button className="w-11/12 h-12 text-lg  bg-blue-600 rounded text-white hover:bg-blue-700">Upload</button> </div>
+                    <div className="mt-3  pb-3"> <button className="w-11/12 h-12 text-lg  bg-blue-600 rounded text-white hover:bg-blue-700" onClick={handleClick}>Upload</button> </div>
                 
         </div>
     )
 }
+
+
+
+

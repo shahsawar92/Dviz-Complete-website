@@ -37,23 +37,23 @@ import './style.css'
             .required('Email Required'),
          username: Yup
             .string()
-            .min(4,"must be more then 4 characters")
-            .max(20, 'Must be 20 characters or less')
+            .min(4,"Must be more then 4 characters")
+            .max(20, 'Maximum 20 characters or less')
             .required('Username Required'),
          first_name: Yup
             .string()
-            .min(2,"more then 3 characters")
-            .max(15,"to long firnst name")
+            .min(2,"More then 3 characters")
+            .max(15,"Too long First Name")
             .required("First Name Required"),
          last_name: Yup
             .string()
-            .min(1, "to short")
-            .max(20,"must not be more then that")
+            .min(1, "Too short")
+            .max(20,"Not more then 20")
             .required("Last Name Required"),
          password1: Yup
             .string()
             .required('Password Required') 
-            .min(8, 'Password is too short - should be 8 chars minimum.')
+            .min(8, 'Password is too short - Should be 8 chars minimum.')
             .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
          password2: Yup
             .string()
@@ -176,7 +176,7 @@ import './style.css'
        <input 
             className="px-8 w-full bg-gray-300  rounded py-4  focus:outline-none items-center"
             id="password1" type={passwordShown?"password":"text"} 
-            placeholder="password1" {...formik.getFieldProps('password1')} />
+            placeholder="Password" {...formik.getFieldProps('password1')} />
             <span id="eyeinput" onClick={()=>togglePasswordVisiblity()} className={passwordShown?" ":"hidden   "}>
          <img className="w-6 h-6 opacity-40" src= {icons.eyeOpen} alt="eye" />
         </span>
@@ -187,11 +187,11 @@ import './style.css'
             <div className={"text-red-600"}>{formik.errors.password1}</div>
             ) : null}
 
-        <label htmlFor="email">Conform Password</label>
+        <label htmlFor="password">Confirm Password</label>
         <input 
             className="px-8 w-full bg-gray-300  rounded py-4   focus:outline-none items-center"
             id="password2"          type={passwordShown?"password":"text"} 
-            placeholder="password1 again" {...formik.getFieldProps('password2')} />
+            placeholder="Password again" {...formik.getFieldProps('password2')} />
             <span id="eyeinput" onClick={()=>togglePasswordVisiblity()} className={passwordShown?"costumW":"hidden w-6 h-6  "}>
          <img className="w-6 h-6 opacity-40" src= {icons.eyeOpen} alt="eye" />
         </span>
