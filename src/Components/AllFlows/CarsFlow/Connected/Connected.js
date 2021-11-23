@@ -116,7 +116,7 @@ export default function Connected() {
       
     ]
     return (
-        <div>
+        <div className="text-sm mt-12 w-11/12 m-auto overflow-x-hidden"  >
             <Table columns={columns} data={data}></Table>
         </div>
     )

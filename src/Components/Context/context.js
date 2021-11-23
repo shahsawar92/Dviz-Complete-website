@@ -57,7 +57,7 @@ useEffect(() => {
     
      setDashboard_card(Array.from(new Set([...Dashboard_card,...filteredCard])))
 
-}, [1])
+}, [])
 
 // set popup data when clicked on a card inside the store
  useEffect(() => {

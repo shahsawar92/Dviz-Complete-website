@@ -10,32 +10,32 @@ export default function Model(props) {
     const history= useHistory();
     const {popUpData,setDashboard_data }=useContext(useContexts);
     var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
+    const [activateBtnWait,setactivateBtnWait]=useState(false)
       console.log('retrievedObject: ', retrievedObject);
     let config = {
         headers: {
            'Content-Type': 'application/json'
         }
       }
-      const URL_to_activate='https://shahbaz.dviz.tech/addflow/';
+      const url_to_Activate='https://shahbaz.dviz.tech/activateflow/';
       const url_to_addToDashboard='https://shahbaz.dviz.tech/addflow/';
-    //   const values_to_activate={
-    //       'access_token':retrievedObject.access_token,
-    //       'flowName':popUpData?.popUpData[0]?.flowName,
-    //       'flowRef':popUpData?.popUpData[0]?.flowRef
-    //   }
-      //const values_to_addToDashboard={
-        // 'username':'rehman',
-        // 'id':4,
-        // 'flowName':popUpData?.popUpData[0]?.flowName,
-        // 'flowRef':popUpData?.popUpData[0]?.flowRef,
-        // 'dashboardMessage':'Add to Dashboard',
-    //}
-  
+
+    const values_to_activate={
+            "id":retrievedObject.user.pk,
+             "username":retrievedObject.user.username,
+            'flowName':popUpData?.popUpData[0]?.flowName,
+            'flowRef':popUpData?.popUpData[0]?.flowRef,
+            'flowLink':popUpData?.popUpData[0]?.flowLink,
+            'grooves': popUpData?.popUpData[0]?.NoOFGroovs,
+    }
+
     const [useEffectToggle,setuseEffectToggle]=useState(false);
     const [toggle,settoggle]=useState(false);
      const [dashbaordMsg, setdashbardMsg] = useState("")
-    
-    
+    const [toggleActivate,settoggleActivate]= useState(false);
+    const [useEffectToggleActivate, setuseEffectToggleActivate]=useState(false);
+    var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
+
       //launch flow function to launch directly from dashboard
       const launchFlow=()=>{
         history.push("/"+popUpData?.popUpData[0]?.flowLink)
@@ -49,38 +49,77 @@ export default function Model(props) {
        setuseEffectToggle(!useEffectToggle)
     }
     //remove from dashboard ftn
+    //handle activate function
+    const handleActivate=()=>{
+        settoggleActivate(true);
+        setuseEffectToggleActivate(true);
+    }
     
-    // const fetchData= (url,values)=>{
-      
-    // }
-// call to fetch data for add to dashboard 
-    // useEffect(()=>{
-    //   const activateCheck= fetchData(URL_to_activate,values_to_activate);
-    //   console.log("loging:",activateCheck);
-    // },[useEffectToggle])
-
+    const Card_Check_URL="https://shahbaz.dviz.tech/store/";
 // call to fetch data for add to dashboard 
     useEffect(()=>{
-        console.log("running useeffect");
+        
        if(toggle){
-        console.log("inside if condition running");
+        setactivateBtnWait(true)
         axios.get(url_to_addToDashboard, 
              {
        params:{
-            'username':'rehman',
-            'id':4,
+            "id":retrievedObject.user.pk,
+             "username":retrievedObject.user.username,
             'flowName':popUpData?.popUpData[0]?.flowName,
             'flowRef':popUpData?.popUpData[0]?.flowRef,
             'dashboardMessage':dashbaordMsg,
+
         }
     },config)
-        .then(res=>{console.log("response of addtodb",res); settoggle(false); 
+        .then(res=>{console.log("response of addtodb",res); 
+        
+        axios.get(Card_Check_URL,{
+            params: {
+                "id":retrievedObject.user.pk,
+                "username":retrievedObject.user.username
+        }
+            },config).then((res)=>{
+                
+                localStorage.setItem("cardCheck",JSON.stringify(res.data))
+              })
+    
+        
+        settoggle(false); 
         history.push("/dashboard");
     })
         .catch(err=>{console.log("response of addtodb",err); settoggle(false);})}
-    //   const addToDashboardcheck=  fetchData(url_to_addToDashboard,values_to_addToDashboard);
-    //   console.log("loging response of add to db",addToDashboardcheck);
+    
      },[useEffectToggle])
+// useeffect for activate flow
+     useEffect(()=>{
+
+        if(toggleActivate){
+            setactivateBtnWait(true);
+            settoggleActivate(false);
+            axios.post(url_to_Activate,values_to_activate, config)
+            .then(res=>{console.log("response of addtodb",res); settoggleActivate(false);
+            setactivateBtnWait(false);
+
+            axios.get(Card_Check_URL,{
+                params: {
+                    "id":retrievedObject.user.pk,
+                    "username":retrievedObject.user.username
+            }
+                },config).then((res)=>{
+                    
+                    localStorage.setItem("cardCheck",JSON.stringify(res.data))
+                  }) 
+            alert('flow activated');
+        })
+            .catch(err=>{console.log("response of addtodb",err); 
+            setactivateBtnWait(false);
+
+            settoggleActivate(false);
+            
+        })}
+
+     },[useEffectToggleActivate])
     
     return (
         <div className={` bg-black md-effect-1 anim animated fadeIn fixed w-screen z-50 pin overflow-auto bg-smoke-dark bg-opacity-90 inset-0  ${props.visiable? "flex":"hidden"} justify-center items-center`} >
@@ -133,6 +172,7 @@ export default function Model(props) {
                                     
                 </div>
                 {/* footer */}
+                {console.log("check data here:",popUpData?.popUpData[0]?.checkDashboard,popUpData?.popUpData[0]?.checkActivate)}
                 <div className={"flex flex-row justify-end py-4 border-t-2   "}>
                     <button  onClick={handleBack} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
                         Back
@@ -146,13 +186,14 @@ export default function Model(props) {
                        Remove from Dashboard
                     </button>}
                     {   !popUpData?.popUpData[0]?.checkActivate &&
-                    <button  onClick={handleBack} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
-                        Activate
+                    <button  onClick={handleActivate} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
+                       {activateBtnWait?"please wait... ": "Activate"}
                     </button> }  
                     {   popUpData?.popUpData[0]?.checkActivate && ( 
-                    <button  onClick={launchFlow} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>
+                    <button  onClick={launchFlow} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}
+                    >
                         Launch
-                    </button>  )
+                    </button> )
                 }                   
                 </div>
             </div>:

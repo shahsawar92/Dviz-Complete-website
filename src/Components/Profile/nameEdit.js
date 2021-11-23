@@ -15,6 +15,8 @@ const [userData,setuserData]=useState(props?.userInfo);
 
 var newFetch = JSON.parse(localStorage.getItem('user'));
 var pk=newFetch.pk;
+var initialData = JSON.parse(localStorage.getItem('completeProfileData'));
+    console.log("new data fetch:",initialData);
 const handleClick=(e)=>{
 const select= document.getElementById("country");
 setcountryFlag(`https://flagpedia.net/data/flags/h80/${select?.selectedOptions[0].dataset.countrycode.toString().toLowerCase()}.png`)
@@ -35,11 +37,11 @@ const handleSave= (e)=>{
       console.log("props useranem:",props?.userInfo?.uName);
 const formik = useFormik({
     initialValues: {
-      username: userData?.uName,
-      first_name:userData?.fName,
-      last_name:userData?.lName,
-      email:userData?.email,
-      phone:userData?.phone
+      username: initialData?.username,
+      first_name:initialData?.first_name,
+      last_name:initialData?.last_name,
+      email:initialData?.email,
+      phone:initialData?.phone_number
     },
 
     onSubmit:(values) => {

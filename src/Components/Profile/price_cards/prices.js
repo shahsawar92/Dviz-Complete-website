@@ -16,9 +16,13 @@ export default function Prices() {
     const [addProGrooves,setaddProGroves]=useState(false)
     const [addVipGrooves,setaddVipGrooves]=useState(false);
    
-    const {profileData,updateInfo,setupdateInfo }=useContext(useContexts);
-    
-    
+    const {profileData}=useContext(useContexts);
+    const [starterPlan, setstarterPlan]=useState(profileData?.starter_plan_check);
+   const [proPlan, setproPlan]= useState(profileData?.pro_plan_check);
+   const [vipPlan,setvipPlan]= useState(profileData?.vip_plan_check)
+    console.log("loging profiledataa",profileData);
+    var newFetch = JSON.parse(localStorage.getItem('completeProfileData'));
+    console.log("new data fetch:",newFetch);
   const plan_id="P-8XC30638NN0098448MEE2UFI";
   const plan_id2="P-4FC00435N8891101MMEE2VYQ";
   const plan_id3="P-96A251586U560802XMEE2WQI";
@@ -30,67 +34,25 @@ export default function Prices() {
     }
   }
 
-  let starterPlan = profileData?.starter_plan_check;
-  let proPlan = profileData?.pro_plan_check;
-  let vipPlan = profileData?.vip_plan_check;
-
-//   useEffect(()=>{
-//       if(starterPlan||proPlan||vipPlan){
-//       if(starterPlan){ setStarterActive(true); setvipActive(false);setproActive(false);setaddProGroves(false);setaddVipGrooves(false)}else
-//       if (proPlan ) { setStarterActive(false); setvipActive(false);setproActive(true);setaddProGroves(false);setaddVipGrooves(false)}else
-//       if (vipPlan )  { setStarterActive(false); setvipActive(true);setproActive(false);setaddProGroves(false);setaddVipGrooves(false)}
-//       }else{
-//          setStarterActive(false); setvipActive(false);setproActive(false);setaddProGroves(false);setaddVipGrooves(false)
-//       }
-//   } ,[updateInfo])
+//   let starterPlan = profileData?.starter_plan_check;
+//   let proPlan = profileData?.pro_plan_check;
+//   let vipPlan = profileData?.vip_plan_check;
 
 useEffect(()=>{
+    console.log('entering useeffect');
+    const timer = setTimeout(() => {
+        console.log("saying inside timer");
+console.log("logging all starter,pro,vip", profileData.starter_plan_check);
+    if(newFetch.starter_plan_check){ setStarterActive(true); setvipActive(false);setproActive(false)}
 
-    if(starterPlan){ setStarterActive(true); setvipActive(false);setproActive(false)}
+    if (newFetch.pro_plan_check ) { setStarterActive(false); setvipActive(false);setproActive(true)}
 
-    if (proPlan ) { setStarterActive(false); setvipActive(false);setproActive(true)}
-
-    if (vipPlan )  { setStarterActive(false); setvipActive(true);setproActive(false)}
-
+    if (newFetch.vip_plan_check )  { setStarterActive(false); setvipActive(true);setproActive(false)}
+}, 1000);
+console.log("outside timer");
+return () => clearTimeout(timer);
   } ,[])
-
-
-//console.log("proactive, vipactive, starteractive",proActive,vipActive,starterActive);
-  //functions
-    //  const handleClick=(e,props)=>{
-    //     console.log(e?.target?.innerText);
-    //     setbuttonClicked(!buttonClicked);
-      
-    //     setPlanClickedName(e?.target?.innerText);
-    //     if(props==='Starter'){
-            
-    //         setShowModal(true);
-    //         setPlanClickedName("Starter")
-    //     }
-    //     if(props==='Pro'){
-            
-    //         if(e?.target?.innerText=="Add Grooves"){
-    //             setStarterActive(false);
-    //              setvipActive(false);
-    //             setproActive(false);
-    //             setaddVipGrooves(false)
-    //             setaddProGroves(true);
-    //         }else
-    //         setPlanClickedName("Pro")
-    //         setShowModal2(true);
-    //     }
-    //     if(props==='Vip'){
-    //         if(e?.target?.innerText=="Add Grooves"){
-    //             setStarterActive(false);
-    //             setproActive(false);
-    //             setaddVipGrooves(false)
-    //             setaddProGroves(true);
-    //             setaddVipGrooves(true);
-    //         }else
-    //         setPlanClickedName("Vip")
-    //         setShowModal3(true);
-    //     }
-    // }
+ 
 
     const handleClick=(e,props)=>{
        
@@ -113,32 +75,7 @@ useEffect(()=>{
          }
     
     }
-//     const handleCounterminus=()=>{
-//             if(counterVip<=1){
-//                 setCounterVip(1)
-//             }else 
-//             setCounterVip(counterVip-1);
-        
-//     }
-//     const handleCounterplus=()=>{
-//             if(counterVip>=10){
-//                 setCounterVip(10);
-//             }else
-//             setCounterVip(counterVip+1);
-//     }
-//     const handleCounterminusPro=()=>{
-//         if(counterPro<=1){
-//             setCounterPro(1)
-//         }else 
-//         setCounterPro(counterPro-1);
     
-// }
-// const handleCounterplusPro=()=>{
-//         if(counterPro>=10){
-//             setCounterPro(10);
-//         }else
-//         setCounterPro(counterPro+1);
-// }
 const handleCounterminus=()=>{
 
     if(counterVip<=1){

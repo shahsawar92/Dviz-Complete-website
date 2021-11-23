@@ -1,36 +1,9 @@
 import React, { useRef, useState } from 'react'
 import './style.css';
 export default function SecondryMenu_Cars() {
-    const ref = useRef()
-        const [ExtentionValue,SetExtensionValue]=useState(false)
-
-    const handleFileChange=(e)=>{
-        e.preventDefault();
-        const output= document.getElementById("uploadFile");
-        console.log("inserting file:",ref.current.files[0].name);
-        if (!hasExtension(ref.current.files[0].name, ['.docx','.doc'])) {
-            SetExtensionValue(true);
-        }else{
-            SetExtensionValue(false)
-        }
-        
-        output.value=ref.current.files[0].name
-        // console.log(`Selected file - ${
-        //     ref.current.files[0].name
-        //   }`);
-    }
-    function hasExtension(inputID, exts) {
-        console.log("testing file:",inputID);
-        return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(inputID);
-    }
-    const handleClick=()=>{
-        if(ExtentionValue){
-            alert("please insert correct extention file!");
-        }
-        else{
-            alert("are you sure to submit")
-        }
-    }
+    
+   
+    
     return (
         <div className="w-5/6 overflow-y-auto ">
            <h1 className="text-primeryClr text-3xl font-bold"> Cars</h1>
@@ -42,19 +15,48 @@ Start a new search or look through previous searches</h3>
 <select name="previous_search"  className={"text-center  rounded py-1 mb-3 form-select block w-full p-3 border border-gray-300  text-gray-600  bg-transparent  z-0"} >
                 <option value="nodata">USA</option>
             </select>
-                    <div className="mb-2"> 
-                        <div className="relative w-11/12 h-40 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer">
-                            <div className="absolute">
-                                <div className="flex flex-col items-center "><span className="block text-gray-400 font-normal">Attach you file here</span> <span className="block text-gray-400 font-normal">or</span> <span className="block text-blue-400 font-normal">Browse file</span> </div>
-                                <input id="uploadFile" value="" className= {`text-center ${ExtentionValue? `bg-red-700`:''}`} placeholder="No File choosen" disabled="disabled" />
-                            </div> <input type="file" ref={ref} accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" className="h-full w-full opacity-0" onChange={handleFileChange} />
-                            
-                        </div>
-                        <div className={`flex w-11/12 justify-center text-center text-gray-400 ${ExtentionValue? `bg-red-600`:'bg-white'}`}> Accepted file type:.csv, .xlxs only</div>
-                    </div>
-                    <div className="mt-3  pb-3"> <button className="w-11/12 h-12 text-lg  bg-blue-600 rounded text-white hover:bg-blue-700" onClick={handleClick}>Upload</button> </div>
-                
-        </div>
+            
+ 
+        <div className="ml-4 mt-2 text-sm">
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+            <label for="vehicle1" className="px-2"> Autotrader</label> <br/>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+            <label for="vehicle1" className="px-2"> Cargurus</label><br/>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+            <label for="vehicle1" className="px-2"> eBay</label><br/>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+            <label for="vehicle1" className="px-2">  Facebook Marketplace</label><br/>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+            <label for="vehicle1" className="px-2"> Craigslist</label>
+            <br/>
+            </div>
+            {/* update cookies btn */}
+            <div className="float-right text-sm mt-2"> update cookies</div>
+            {/* zip code input */}
+            <input type="text" className="border-2 py-1 w-full rounded mt-2" id="vehicle1" name="vehicle1" placeholder="  Please enter valid zip code" />
+            {/* search with in */}
+            
+            <select name="previous_search"  className={"text-center mt-5 rounded py-1 mb-3 form-select block w-full p-3 border border-gray-300  text-gray-600  bg-transparent  z-0"} >
+                <option value="nodata">Search with in</option>
+                <option value="nodata">10 mile</option>
+                <option value="nodata">20 mile</option>
+                <option value="nodata">50 mile</option>
+                <option value="nodata">100 mile</option>
+            </select>
+            {/* private saller */}
+            
+            <label class="switch">
+            <input type="checkbox"/>
+            <span class="slider round"></span>
+            </label>
+            {/* search */}
+            <button className="py-1 my-2 rounded w-full bg-primeryClr text-white ">Search</button>
+            {/* Set Schedule */}
+            <button className="py-1 my-2 rounded w-full bg-primeryClr text-white">Set Scehdule</button>
+
+            {/* check created schedule */}
+            <button className="py-1 my-2 rounded w-full bg-primeryClr text-white">Check Created Schedules</button>
+</div>
     )
 }
 

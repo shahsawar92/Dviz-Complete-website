@@ -57,7 +57,7 @@ import axios from "axios";
            flowRef:"Facebook_Outreach",
            image:icons.facebook,
            },
-           {flowName: "News Feed",
+           {flowName: "Newsfeed",
            badge:["Content"],
            flowRef:"NewsFeed_Content",
            checkDashboard:cardCheck?.newsfeed_dashboard,
@@ -222,7 +222,7 @@ import axios from "axios";
            flowRef:"Facebook_Outreach",
        },
        {
-           flowName: "News Feed",
+           flowName: "Newsfeed",
            flowRef:"NewsFeed_Content",
            flowLink:"newsfeed",
            checkDashboard:cardCheck?.newsfeed_dashboard,

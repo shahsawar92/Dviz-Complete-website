@@ -8,8 +8,8 @@ import axios from 'axios';
 
 function Dashboard() {
     const {initial}=DataStore();
-    const {cardata, PopUpDataList}=initial;
-    const [setAllTrue, setsetAllTrue] = useState([])
+  
+    
      const {Dashboard_card,setDashboard_card }=useContext(useContexts);
     const Card_Check_URL="https://shahbaz.dviz.tech/store/";
     let config = {
@@ -28,6 +28,7 @@ function Dashboard() {
             history.push("/phonevalidation")
         } 
     }
+    
 useEffect(()=>{
 
     axios.get(Card_Check_URL,{
