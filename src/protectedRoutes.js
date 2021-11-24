@@ -4,9 +4,9 @@ import Cookies from 'js-cookie'
 
 function ProtectedRoute(props) {
 
-    const Component= props.component;
+  const Component= props.component;
     console.log("call to component: ",props.path);
-        return getSession()!==null ? (
+        return getSession()!==null  ? (
             <Component/>
             ) : (
             <Redirect to={{ pathname: '/' }} />

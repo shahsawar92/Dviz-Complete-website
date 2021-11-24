@@ -52,7 +52,7 @@ export default function Model(props) {
     //handle activate function
     const handleActivate=()=>{
         settoggleActivate(true);
-        settoggleButton(!toggleButton)
+        settoggleButton(!toggleButton);
         setuseEffectToggleActivate(!useEffectToggleActivate);
     }
     
@@ -115,7 +115,6 @@ export default function Model(props) {
         })
             .catch(err=>{console.log("response of addtodb",err); 
             setactivateBtnWait(false);
-
             settoggleActivate(false);
             
         })}
@@ -173,6 +172,7 @@ export default function Model(props) {
                                     
                 </div>
                 {/* footer */}
+                {console.log("popupdata in model:",popUpData)}
                 {console.log("check data here:",popUpData?.popUpData[0]?.checkDashboard,popUpData?.popUpData[0]?.checkActivate)}
                 <div className={"flex flex-row justify-end py-4 border-t-2   "}>
                     <button  onClick={handleBack} className={"bg-primeryClr rounded h-12 text-white px-4 m-2  "}>

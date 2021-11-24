@@ -4,7 +4,7 @@ import ForgetPwd from './Components/ForgetPassword';
 import SignUp from './Components/Signup';
 import * as ROUTES from './Constants/Routes';
 import SignIn from './Components/Signin';
-import { Globalprovider } from './Components/Context/context';
+import { Globalprovider, useContexts } from './Components/Context/context';
 import  {
       ProfileRoute,
       StoreRoute,
@@ -23,11 +23,15 @@ import ResetPassword from './Components/ResetPassword';
 import ProtectedLoginRoute from './routeForLogin';
 import EmailSent from './Components/ForgetPassword/emailSent';
 import PasswordChanged from './Components/ResetPassword/passwordChanges';
+import { useContext } from 'react/cjs/react.development';
 
 
 
 function App() {
 //   const [signed, setSigned]= useState(false);
+var cardDataCheck = JSON.parse(localStorage.getItem('cardCheck'));
+    console.log('cardDataCheck: ', cardDataCheck);
+
   return (
      <Globalprovider> 
     <Switch>
@@ -50,14 +54,27 @@ function App() {
 {/* down here we will have routes to all flows one by one! */}
     
       {/* route to email validation flow */}
-      <ProtectedRoute path={"/emailvalidation"} component={EmailValidationRoute}/>
+      
        {/* route to email validation flow */}
-       <ProtectedRoute path={"/phonevalidation"} component={PhoneValidationRoute}/>
+       
       {/* route to instagram flow */}
-      <ProtectedRoute path={"/instagram"} component={InstagramRoute}/>
+     
+      {console.log("checking cars :",cardDataCheck?.cars_check)}
+{cardDataCheck?.cars_check?
+      <ProtectedRoute  path={"/cars"} component={CarsRoute}/>
+:<Route path={"/notfound"} component={Page404} />}
 
-      <ProtectedRoute path={"/cars"} component={CarsRoute}/>
+{cardDataCheck?.instagram_check?
+     <ProtectedRoute path={"/instagram"} component={InstagramRoute}/>
+:<Route path={"/notfound"} component={Page404} />}
 
+{cardDataCheck?.emailvalidation_check?
+     <ProtectedRoute path={"/emailvalidation"} component={EmailValidationRoute}/>
+:<Route path={"/notfound"} component={Page404} />}
+
+{cardDataCheck?.phonevalidation_check?
+     <ProtectedRoute path={"/phonevalidation"} component={PhoneValidationRoute}/>
+:<Route path={"/notfound"} component={Page404} />}
 
       <Route path={ROUTES.SIGN_UP} component={SignUp} />
       <Route path={ROUTES.PASSWORD_FORGET} component={ForgetPwd}/>
