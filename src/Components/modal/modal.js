@@ -8,7 +8,7 @@ import axios from 'axios';
 
 export default function Model(props) {
     const history= useHistory();
-    const {popUpData,setDashboard_data }=useContext(useContexts);
+    const {popUpData ,toggleButton,settoggleButton}=useContext(useContexts);
     var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
     const [activateBtnWait,setactivateBtnWait]=useState(false)
       console.log('retrievedObject: ', retrievedObject);
@@ -52,7 +52,8 @@ export default function Model(props) {
     //handle activate function
     const handleActivate=()=>{
         settoggleActivate(true);
-        setuseEffectToggleActivate(true);
+        settoggleButton(!toggleButton)
+        setuseEffectToggleActivate(!useEffectToggleActivate);
     }
     
     const Card_Check_URL="https://shahbaz.dviz.tech/store/";

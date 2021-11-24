@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useContexts } from "../Context/context";
 
 export default function PaypalComponent(props) {
-  const {profileData,updateProfileDAta,setupdateProfileData}=useContext(useContexts);
+  const {profileData,updateProfileDAta,setupdateProfileData,setupdateInfoprofile,updateInfoprofile}=useContext(useContexts);
   const {setShowModal} = props;
 
   let config = {
@@ -49,7 +49,7 @@ export default function PaypalComponent(props) {
       }
   } ,config)
    .then(response => {
-      
+    setupdateInfoprofile(!updateInfoprofile)
        console.log("response",response);
    
    }).catch(error=>{ console.log(error); }  )

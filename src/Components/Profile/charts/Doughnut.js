@@ -1,10 +1,12 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-
+var newFetch = JSON.parse(localStorage.getItem('completeProfileData'));
 
 const DoughnutChart = ({profileData}) => (
+
   
   <>
+  
   {console.log("profledata:",profileData)}
    {profileData?.starter_plan_check && <div className="text-center pb-3 font-bold">You are currently subscribed to the Starter Plan</div>}
    {profileData?.pro_plan_check && <div>You are currently subscribed to the Pro Plan</div>}

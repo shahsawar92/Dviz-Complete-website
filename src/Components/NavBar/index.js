@@ -14,7 +14,7 @@ export default function Menu() {
 	var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
 	console.log('retrievedObject: ', retrievedObject);
 	const location = useLocation();
-    const {toggle, setToggle, noOfNotifications,updateProfileDAta} = useContext(useContexts);	
+    const {toggle, setToggle, noOfNotifications,updateProfileDAta,updateInfoprofile,setupdateInfoprofile} = useContext(useContexts);	
 	const userImage=useContext(useContexts);
 	const [userData,setuserData]=useState({})
 	// actions
@@ -67,7 +67,7 @@ const profileStyle={
     }).catch(error=>{ console.log(error); }  ) 
    },
     
-    [updateProfileDAta])
+    [updateProfileDAta,updateInfoprofile])
 	
     return (
         

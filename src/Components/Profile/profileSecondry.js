@@ -12,7 +12,7 @@ export default function ProfileSecondry() {
         //   Retrieve the object from storage
         var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
         console.log('retrievedObject: ', retrievedObject);
-    const {updateInfo,setupdateInfo,profileImg,setProfileImg, profileData,setProfileData,updateInfoprofile} =useContext(useContexts);
+    const {updateInfo,setupdateInfo,profileImg,setProfileImg, profileData,setProfileData,setupdateInfoprofile,updateInfoprofile} =useContext(useContexts);
     console.log("profile data ffrom context",profileData);
   
     let config = {
@@ -39,6 +39,7 @@ export default function ProfileSecondry() {
             if(response.status===200){
                 setupdateInfo(!updateInfo);
                 setProfileData(response?.data?.response)
+                setupdateInfoprofile(!updateInfoprofile)
                 localStorage.setItem("completeProfileData",JSON.stringify(response?.data?.response))
             }
         console.log('profile info response :',response);

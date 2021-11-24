@@ -38,7 +38,10 @@ export const Globalprovider=({children})=>{
     const[updateProfileDAta,setupdateProfileData]=useState(false);
 
     const [updateInfo,setupdateInfo]=useState(false)
+    //univesial toggle for no of groves on activate button.
     const [updateInfoprofile,setupdateInfoprofile]=useState(false)
+// toggle for deduction of grooves.
+    const [toggleButton,settoggleButton]=useState(false);
     //state for response of store activated cards
    
 
@@ -63,7 +66,7 @@ useEffect(() => {
  useEffect(() => {
     setpopUpData({popUpData:initial?.PopUpDataList.filter(data=>(popUpName[0]===data.flowName && popUpName[1]===data.flowRef))})
     
-}, [popUpName])
+}, [popUpName,toggleButton])
 
 //store secondery menu buttons:
 // button for all categories.
@@ -97,7 +100,7 @@ function allCat(e){
 //return the wrapper 
     return (
         <useContexts.Provider value={{
-            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData,updateInfo,setupdateInfo,updateInfoprofile,setupdateInfoprofile,updateProfileDAta,setupdateProfileData
+            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle,toggleButton,settoggleButton, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData,updateInfo,setupdateInfo,updateInfoprofile,setupdateInfoprofile,updateProfileDAta,setupdateProfileData
         }}>
             {children}
         </useContexts.Provider>
