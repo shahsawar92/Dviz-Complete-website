@@ -1,11 +1,9 @@
+import { useEffect } from "react";
 import { icons } from "../../Utilities/flow_icons"
-import React, {  useEffect, useState } from 'react'
-import axios from "axios";
 
 
     const DataStore = () => {
         var cardCheck = JSON.parse(localStorage.getItem('cardCheck'));
-        console.log("cardcheck",cardCheck);
  const initial={
     carData:[
            {flowName: "Cars",
@@ -157,8 +155,8 @@ import axios from "axios";
            flowName: "Channels",
            flowRef:"Channel_Content",
            flowLink:"youtubechannels",
-           checkDashboard:cardCheck?.cars_dashboard,
-           checkActivate: cardCheck?.cars_check,
+           checkDashboard:cardCheck?.youtubechannels_dashboard,
+           checkActivate: cardCheck?.youtubechannels_check,
            NoOFGroovs: 3,
            ProductModuleTitle:"Product Module Title",
            ProductModuleTitleArray:[],

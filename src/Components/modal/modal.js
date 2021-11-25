@@ -11,10 +11,12 @@ export default function Model(props) {
     const {popUpData ,toggleButton,settoggleButton}=useContext(useContexts);
     var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
     const [activateBtnWait,setactivateBtnWait]=useState(false)
-      console.log('retrievedObject: ', retrievedObject);
+      console.log('retrievedObject: check for barrer ', retrievedObject);
+
     let config = {
         headers: {
-           'Content-Type': 'application/json'
+           'Content-Type': 'application/json',
+           
         }
       }
       const url_to_Activate='https://shahbaz.dviz.tech/activateflow/';
@@ -46,6 +48,7 @@ export default function Model(props) {
     const handleFunction=(e)=>{
         setdashbardMsg(e.target.innerText)
         settoggle(true)
+        settoggleButton(!toggleButton);
        setuseEffectToggle(!useEffectToggle)
     }
     //remove from dashboard ftn
@@ -69,6 +72,7 @@ export default function Model(props) {
              "username":retrievedObject.user.username,
             'flowName':popUpData?.popUpData[0]?.flowName,
             'flowRef':popUpData?.popUpData[0]?.flowRef,
+            'flowLink':popUpData?.popUpData[0]?.flowLink,
             'dashboardMessage':dashbaordMsg,
 
         }
@@ -81,13 +85,15 @@ export default function Model(props) {
                 "username":retrievedObject.user.username
         }
             },config).then((res)=>{
-                
+                console.log("every thing went well");
                 localStorage.setItem("cardCheck",JSON.stringify(res.data))
               })
     
         
         settoggle(false); 
         history.push("/dashboard");
+        settoggleButton(!toggleButton)
+        
     })
         .catch(err=>{console.log("response of addtodb",err); settoggle(false);})}
     
@@ -99,27 +105,31 @@ export default function Model(props) {
             setactivateBtnWait(true);
             settoggleActivate(false);
             axios.post(url_to_Activate,values_to_activate, config)
-            .then(res=>{console.log("response of addtodb",res); settoggleActivate(false);
-            setactivateBtnWait(false);
-
+            .then(res=>{
+               
+                    alert(res.data.activation_message)
+                    settoggleActivate(false);
+                    setactivateBtnWait(false); 
             axios.get(Card_Check_URL,{
                 params: {
                     "id":retrievedObject.user.pk,
                     "username":retrievedObject.user.username
             }
-                },config).then((res)=>{
-                    
-                    localStorage.setItem("cardCheck",JSON.stringify(res.data))
-                  }) 
-            alert('flow activated');
+                }).then((res)=>{
+                    if(res.status===200){
+                        localStorage.setItem("cardCheck",JSON.stringify(res.data))      
+                    } 
+                  })  
         })
-            .catch(err=>{console.log("response of addtodb",err); 
+            .catch(err=>{
+                alert(err.data.activation_message);
+                console.log("response of error here :",err); 
             setactivateBtnWait(false);
             settoggleActivate(false);
             
         })}
 
-     },[useEffectToggleActivate])
+     },[useEffectToggleActivate, toggleButton])
     
     return (
         <div className={` bg-black md-effect-1 anim animated fadeIn fixed w-screen z-50 pin overflow-auto bg-smoke-dark bg-opacity-90 inset-0  ${props.visiable? "flex":"hidden"} justify-center items-center`} >

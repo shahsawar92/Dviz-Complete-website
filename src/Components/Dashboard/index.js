@@ -9,8 +9,11 @@ import axios from 'axios';
 function Dashboard() {
     const {initial}=DataStore();
   
-    
-     const {Dashboard_card,setDashboard_card }=useContext(useContexts);
+    const [Dashboard_card, setDashboard_card]=useState([]);
+
+     const {toggleButton }=useContext(useContexts);
+
+     
     const Card_Check_URL="https://shahbaz.dviz.tech/store/";
     let config = {
         headers: {
@@ -19,6 +22,8 @@ function Dashboard() {
       }
     const history=useHistory();
     
+    var cardDataCheck = JSON.parse(localStorage.getItem('cardCheck'));
+    console.log('cardDataCheck: ', cardDataCheck);
     var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
     console.log('retrievedObject: ', retrievedObject);
     const handleClick=(e)=>{      
@@ -28,7 +33,10 @@ function Dashboard() {
             history.push("/phonevalidation")
         } 
     }
+    console.log("loging toggle btn:",toggleButton);
+
     
+
 useEffect(()=>{
 
     axios.get(Card_Check_URL,{
@@ -40,7 +48,19 @@ useEffect(()=>{
             
             localStorage.setItem("cardCheck",JSON.stringify(res.data))
           })
-},[1])
+},[toggleButton])
+
+useEffect(() => {
+    setTimeout(()=>{
+
+    
+     const filteredCard=(initial.carData.filter(card => (card.checkDashboard===true)))
+     
+      setDashboard_card(Array.from(new Set([...Dashboard_card,...filteredCard])))
+ console.log("after setdashboard in useeffect",toggleButton);
+}, 2000)
+     
+ }, [toggleButton])
 
     // Object.entries(cardDataCheck).map(([key, value]) => { // maping all the keys to check weather a card is active or not
     //     console.log(key,value);

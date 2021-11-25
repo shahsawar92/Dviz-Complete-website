@@ -39,18 +39,13 @@ export default function Prices() {
 //   let vipPlan = profileData?.vip_plan_check;
 
 useEffect(()=>{
-    console.log('entering useeffect');
-    const timer = setTimeout(() => {
-        console.log("saying inside timer");
-console.log("logging all starter,pro,vip", profileData.starter_plan_check);
+    
     if(newFetch.starter_plan_check){ setStarterActive(true); setvipActive(false);setproActive(false)}
 
     if (newFetch.pro_plan_check ) { setStarterActive(false); setvipActive(false);setproActive(true)}
 
     if (newFetch.vip_plan_check )  { setStarterActive(false); setvipActive(true);setproActive(false)}
-}, 1000);
-console.log("outside timer");
-return () => clearTimeout(timer);
+
   } ,[])
  
 

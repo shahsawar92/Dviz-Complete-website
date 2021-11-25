@@ -21,7 +21,6 @@ export default function ProfileSecondry() {
             
         }
       }
-      const URL='https://shahbaz.dviz.tech/update/ProfileImage/'
       const URL_PROFILE="https://shahbaz.dviz.tech/profile_page/"
 
     
@@ -46,7 +45,7 @@ export default function ProfileSecondry() {
     }).catch(error=>{ console.log(error); }  ) 
    },
     
-    [updateInfoprofile])
+    [])
   
         
       
@@ -76,17 +75,25 @@ export default function ProfileSecondry() {
         lName:profileData.last_name,
         phone:profileData.phone_number
     }
-   
-   
-    const changePhoto=(e)=>{
+    console.log("file profile img",profileImg);
+
+    const formData = new FormData();
+    formData.append("file", profileImg);
         let newImage= new FileReader();
-        newImage.onload=()=>{
-            if(newImage.readyState===2){
-                setProfileImg(newImage.result);
-            }
-        }
-        newImage.readAsDataURL(e.target.files[0]);
-        e.preventDefault();
+        console.log("newimage here",formData);
+    const changePhoto=(e)=>{
+        const formData = new FormData();
+    formData.append("file", profileImg);
+        let newImage= new FileReader();
+        console.log("newimage here",formData);
+        
+        // newImage.onload=()=>{
+        //     if(newImage.readyState===2){
+        //         setProfileImg(newImage.result);
+        //     }
+        // }
+        // newImage.readAsDataURL(e.target.files[0]);
+        // e.preventDefault();
     }
 
     return (
@@ -96,7 +103,9 @@ export default function ProfileSecondry() {
         <div className={" overflow-y-auto "}>
         <h1 className=" text-xl pb-2">Profile & account</h1>
          <div> 
-                    <input type="file" id="actual-btn" onChange={changePhoto} className="hidden" accept="image/*"/>
+                    {/* <input type="file" onChange={changePhoto} className="hidden" accept="image/*"/> */}
+                    <input type="file" id="actual-btn"  name="file" accept="image/*" className="hidden" onChange={(e) => setProfileImg(e.target.files[0])} />
+         
                 
                 <label htmlFor="actual-btn"><svg  xmlns="http://www.w3.org/2000/svg" className="cursor-pointer h-5 w-5 svg" viewBox="0 0 20 20" fill="currentColor">
             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
