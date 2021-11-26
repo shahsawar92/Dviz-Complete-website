@@ -57,12 +57,13 @@ var cardDataCheck = JSON.parse(localStorage.getItem('cardCheck'));
       
        {/* route to email validation flow */}
        
-      {/* route to instagram flow */}
+      {/* route to instagram flow */}     
+       <ProtectedRoute  path={"/cars"} component={CarsRoute}/>
      
       {console.log("checking cars :",cardDataCheck?.cars_check)}
-{cardDataCheck?.cars_check?
-      <ProtectedRoute  path={"/cars"} component={CarsRoute}/>
-:<Route path={"/notfound"} component={Page404} />}
+{/* {cardDataCheck?.cars_check?
+
+:<Route path={"/notfound"} component={Page404} />} */}
 
 {cardDataCheck?.instagram_check?
      <ProtectedRoute path={"/instagram"} component={InstagramRoute}/>
