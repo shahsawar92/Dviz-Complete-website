@@ -53,15 +53,11 @@ const paramseffect={
 
 useEffect(() => {
     setTimeout(()=>{
-
-    
      const filteredCard=(initial.carData.filter(card => (card.checkDashboard===true)))
-     
       setDashboard_card(Array.from(new Set([...Dashboard_card,...filteredCard])))
- 
 }, 2000)
      
- }, [toggleButton,initial.carData,Dashboard_card])
+ }, [toggleButton])
 
     // Object.entries(cardDataCheck).map(([key, value]) => { // maping all the keys to check weather a card is active or not
     //     console.log(key,value);
