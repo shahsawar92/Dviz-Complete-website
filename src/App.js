@@ -4,7 +4,7 @@ import ForgetPwd from './Components/ForgetPassword';
 import SignUp from './Components/Signup';
 import * as ROUTES from './Constants/Routes';
 import SignIn from './Components/Signin';
-import { Globalprovider, useContexts } from './Components/Context/context';
+import { Globalprovider } from './Components/Context/context';
 import  {
       ProfileRoute,
       StoreRoute,
@@ -23,7 +23,6 @@ import ResetPassword from './Components/ResetPassword';
 import ProtectedLoginRoute from './routeForLogin';
 import EmailSent from './Components/ForgetPassword/emailSent';
 import PasswordChanged from './Components/ResetPassword/passwordChanges';
-import { useContext } from 'react/cjs/react.development';
 
 
 

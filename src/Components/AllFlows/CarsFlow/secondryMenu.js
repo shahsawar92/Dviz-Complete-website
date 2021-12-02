@@ -3,36 +3,32 @@ import ModelForCookies from './Model_Boxes/modelForCookies';
 import React, { useState } from 'react';
 import { useFormik , } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+// import axios from 'axios';
 
 
 
 import './style.css';
-export default function SecondryMenu_Cars() {
-    const [country,setcountry]=useState();
-    const [platform,setplatform]=useState();
-    const [zipcode, setzipcode]=useState();
-    const [radius, setradius]= useState();
-    const [private_seller,setprivate_seller]=useState();
+export default function SecondryMenuCars() {
+    
+    
     const [showModel, setshowModel]=useState(false);
-    const [isSubmitting, setSbumitting]=useState(false);
     const updateCookies=()=>{
         setshowModel(true);
     }
     const selectradius=(e)=>{
        if(e.target.value!=="search"){
-           setradius(e.target.value);
+           
        }
     }
 
     
   
-  let config = {
-    headers: {
-       'Content-Type': 'application/json'
-    }
-  }
-  const URL='#';
+  // let config = {
+  //   headers: {
+  //      'Content-Type': 'application/json'
+  //   }
+  // }
+  // const URL='#';
 
    const formik = useFormik({
      initialValues: {
@@ -49,8 +45,8 @@ export default function SecondryMenu_Cars() {
          platform: Yup.object   ({
             platform: Yup.array().required('At least one checkbox is required'),
           }),
-          zipcode:Yup.string().
-          required("zip code req"),
+          zipcode:Yup.string()
+          .required("zip code req"),
          password: Yup.string()
          .required('Password Required')
          .min(8, 'Password is too short - should be 8 chars minimum.')
@@ -100,7 +96,7 @@ Start a new search or look through previous searches</h3>
             <div className="float-right text-sm mt-2" onClick={()=>updateCookies()}>update cookies</div>
             {/* zip code input */}
             {/* <input type="text" className="border-2 py-1 w-full rounded mt-2" id="vehicle1" name="vehicle1" placeholder="  Please enter valid zip code" /> */}
-            <input onChange={(e)=>{setzipcode(e.target.value)}} name="zip" id="Zip__code" type="text" maxLength="5" pattern="\d{5}|\d{5}"
+            <input onChange={console.log("")} name="zip" id="Zip__code" type="text" maxLength="5" pattern="\d{5}|\d{5}"
 										title="must be 5 digit ZIP Code '10010'"className="border-2 py-1 w-full rounded mt-2"
 										 placeholder="Please Enter Valid ZIP Code.."
                                          {...formik.getFieldProps('zipcode')}

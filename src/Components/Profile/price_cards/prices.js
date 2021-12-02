@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import PayPal from '../paypal';
 import PaypalComponent from '../paypalComponent';
-import {useContexts} from '../../Context/context'
-import axios from 'axios';
+// import {useContexts} from '../../Context/context'
+// import axios from 'axios';
 
 export default function Prices() {
     const [counterVip, setCounterVip]=useState(1)
@@ -16,23 +16,23 @@ export default function Prices() {
     const [addProGrooves,setaddProGroves]=useState(false)
     const [addVipGrooves,setaddVipGrooves]=useState(false);
    
-    const {profileData}=useContext(useContexts);
-    const [starterPlan, setstarterPlan]=useState(profileData?.starter_plan_check);
-   const [proPlan, setproPlan]= useState(profileData?.pro_plan_check);
-   const [vipPlan,setvipPlan]= useState(profileData?.vip_plan_check)
-    console.log("loging profiledataa",profileData);
+    // const {profileData}=useContext(useContexts);
+//     const [starterPlan, setstarterPlan]=useState(profileData?.starter_plan_check);
+//    const [proPlan, setproPlan]= useState(profileData?.pro_plan_check);
+//    const [vipPlan,setvipPlan]= useState(profileData?.vip_plan_check)
+   
     var newFetch = JSON.parse(localStorage.getItem('completeProfileData'));
-    console.log("new data fetch:",newFetch);
+   
   const plan_id="P-8XC30638NN0098448MEE2UFI";
   const plan_id2="P-4FC00435N8891101MMEE2VYQ";
   const plan_id3="P-96A251586U560802XMEE2WQI";
   const plan_id_addPro="P-3UF088138S573254CMEXZAWY";
   const plan_id_addVip="P-944133830R0875825MEXZAAA";
-  let config = {
-    headers: {
-       'Content-Type': 'application/json'
-    }
-  }
+//   let config = {
+//     headers: {
+//        'Content-Type': 'application/json'
+//     }
+//   }
 
 //   let starterPlan = profileData?.starter_plan_check;
 //   let proPlan = profileData?.pro_plan_check;
@@ -46,24 +46,24 @@ useEffect(()=>{
 
     if (newFetch.vip_plan_check )  { setStarterActive(false); setvipActive(true);setproActive(false)}
 
-  } ,[])
+  } ,[newFetch.starter_plan_check, newFetch.pro_plan_check, newFetch.vip_plan_check])
  
 
     const handleClick=(e,props)=>{
        
         console.log(e.target.innerText);
     
-        if(props=="Starter"){
+        if(props==="Starter"){
             setShowModal(true);
         }
-        if(props=='Pro'){
-           if(e.target.innerText=="Add Grooves"){
+        if(props==='Pro'){
+           if(e.target.innerText==="Add Grooves"){
                 setaddProGroves(true); 
             }else  
             setShowModal2(true);  
         }  
-        if(props=='Vip'){  
-            if(e.target.innerText=="Add Grooves"){  
+        if(props==='Vip'){  
+            if(e.target.innerText==="Add Grooves"){  
                 setaddVipGrooves(true);  
             }else
              setShowModal3(true);

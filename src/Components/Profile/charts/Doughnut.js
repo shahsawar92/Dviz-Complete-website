@@ -9,9 +9,10 @@ const DoughnutChart = ({profileData}) => (
   {console.log("newfetch check karo",newFetch)}
   
  
-   {newFetch?.starter_plan_check && <div className="text-center pb-3 font-bold">You are currently subscribed to the Starter Plan</div>
-   || newFetch?.pro_plan_check && <div>You are currently subscribed to the Pro Plan</div>
-   || newFetch?.vip_plan_check && <div>You are currently subscribed to the Vip Plan</div>}
+   {newFetch?.starter_plan_check && <div className="text-center pb-3 font-bold">You are currently subscribed to the Starter Plan</div>}
+    { newFetch?.pro_plan_check && <div>You are currently subscribed to the Pro Plan</div>}
+
+    { newFetch?.vip_plan_check && <div>You are currently subscribed to the Vip Plan</div>  }
    
 {console.log("starter plan check",profileData?.starter_plan_check)}
 {console.log("starter plan used",profileData?.grooves_used)}

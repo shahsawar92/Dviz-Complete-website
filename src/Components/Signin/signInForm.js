@@ -22,7 +22,7 @@ import {icons} from '../../Utilities/flow_icons'
    //sent to store
    const [isSubmitting, setSbumitting]=useState(false);
    const [errorMsg,setErrorMsg]=useState()
-  const {setloginInfo,updateInfoprofile,setupdateInfoprofile}= useContext(useContexts);
+  const {updateInfoprofile,setupdateInfoprofile}= useContext(useContexts);
   let config = {
     headers: {
        'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ const history=useHistory();
      onSubmit:(values) => {
        console.log("values are:",values);
        setSbumitting(true);  
-        axios.post(URL, values,config)
+        axios.post(URL,values,config)
             .then(response => {
               console.log("response of login:",response);
               if(response.status===200){
@@ -67,7 +67,7 @@ const history=useHistory();
                 console.log(response.statusText);
                 alert(response.statusText)
               }
-            })  .catch(function (error){
+            }).catch(function (error){
               setSbumitting(false);
               if (error.response) {
                 // The request was made and the server responded with a status code

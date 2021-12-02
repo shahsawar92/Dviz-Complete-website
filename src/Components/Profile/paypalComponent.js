@@ -60,7 +60,7 @@ export default function PaypalComponent(props) {
      },
  
  }).render('#paypal-button-container')
-   },[])
+   })
   return (
     <>
       (

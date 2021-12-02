@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link,useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useContexts } from '../Context/context';
 import { icons } from '../../Utilities/flow_icons';
 import './style.css'
@@ -13,30 +13,17 @@ export default function Model(props) {
     const [activateBtnWait,setactivateBtnWait]=useState(false)
       console.log('retrievedObject: check for barrer ', retrievedObject);
 
-    let config = {
-        headers: {
-           'Content-Type': 'application/json',
-           
-        }
-      }
+    
       const url_to_Activate='https://shahbaz.dviz.tech/activateflow/';
       const url_to_addToDashboard='https://shahbaz.dviz.tech/addflow/';
 
-    const values_to_activate={
-            "id":retrievedObject.user.pk,
-             "username":retrievedObject.user.username,
-            'flowName':popUpData?.popUpData[0]?.flowName,
-            'flowRef':popUpData?.popUpData[0]?.flowRef,
-            'flowLink':popUpData?.popUpData[0]?.flowLink,
-            'grooves': popUpData?.popUpData[0]?.NoOFGroovs,
-    }
+  
 
     const [useEffectToggle,setuseEffectToggle]=useState(false);
     const [toggle,settoggle]=useState(false);
      const [dashbaordMsg, setdashbardMsg] = useState("")
     const [toggleActivate,settoggleActivate]= useState(false);
     const [useEffectToggleActivate, setuseEffectToggleActivate]=useState(false);
-    var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
 
       //launch flow function to launch directly from dashboard
       const launchFlow=()=>{
@@ -62,7 +49,13 @@ export default function Model(props) {
     const Card_Check_URL="https://shahbaz.dviz.tech/store/";
 // call to fetch data for add to dashboard 
     useEffect(()=>{
-        
+        let config = {
+            headers: {
+               'Content-Type': 'application/json',
+               
+            }
+          }
+         
        if(toggle){
         setactivateBtnWait(true)
         axios.get(url_to_addToDashboard, 
@@ -95,11 +88,25 @@ export default function Model(props) {
         settoggleButton(!toggleButton)
         
     })
-        .catch(err=>{console.log("response of addtodb",err); settoggle(false);})}
+        .catch(err=>{console.log(err); settoggle(false);})}
     
-     },[useEffectToggle])
+     },[useEffectToggle,history,dashbaordMsg, popUpData?.popUpData, retrievedObject.user.pk, retrievedObject.user.username, settoggleButton,toggle, toggleButton])
 // useeffect for activate flow
      useEffect(()=>{
+        const values_to_activate={
+            "id":retrievedObject.user.pk,
+             "username":retrievedObject.user.username,
+            'flowName':popUpData?.popUpData[0]?.flowName,
+            'flowRef':popUpData?.popUpData[0]?.flowRef,
+            'flowLink':popUpData?.popUpData[0]?.flowLink,
+            'grooves': popUpData?.popUpData[0]?.NoOFGroovs,
+    }
+        let config = {
+            headers: {
+               'Content-Type': 'application/json',
+               
+            }
+          }
 
         if(toggleActivate){
             setactivateBtnWait(true);
@@ -129,7 +136,7 @@ export default function Model(props) {
             
         })}
 
-     },[useEffectToggleActivate, toggleButton])
+     },[useEffectToggleActivate, toggleButton, retrievedObject.user.pk, retrievedObject.user.username, toggleActivate,popUpData?.popUpData])
     
     return (
         <div className={` bg-black md-effect-1 anim animated fadeIn fixed w-screen z-50 pin overflow-auto bg-smoke-dark bg-opacity-90 inset-0  ${props.visiable? "flex":"hidden"} justify-center items-center`} >

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import './style.css';
-export default function SecondryMenu_EmailValidation() {
+export default function SecondryMenuEmailValidation() {
     const ref = useRef()
         const [ExtentionValue,SetExtensionValue]=useState(false)
 

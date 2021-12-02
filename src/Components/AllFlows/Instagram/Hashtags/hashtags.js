@@ -2,7 +2,7 @@ import React from 'react'
 import Table from '../../../TableForAllFlows/table'
 
 export default function Hashtags() {
-  let downloadBtn=true;
+  
     const columns =[
         {
           Header:"Insta Id",

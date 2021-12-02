@@ -1,32 +1,32 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './style.css'
-import { countries } from './data/countries';
-import { icons } from '../../Utilities/flow_icons';
-import { images } from '../../Utilities/Images';
+// import { countries } from './data/countries';
+// import { icons } from '../../Utilities/flow_icons';
+// import { images } from '../../Utilities/Images';
 import { useFormik } from 'formik';
 import axios from 'axios';
 export default function EditFrom(props) {
     const handleBack=()=>{
         props.setD(false);
     }   
-const [countryFlag, setcountryFlag] = useState(icons.phoneIcon);
-const [dailCode, setdailCode]=useState("");
-const [userData,setuserData]=useState(props?.userInfo);
+// const [countryFlag, setcountryFlag] = useState(icons.phoneIcon);
+// const [dailCode, setdailCode]=useState("");
+// const [userData,setuserData]=useState(props?.userInfo);
 
 var newFetch = JSON.parse(localStorage.getItem('user'));
 var pk=newFetch.pk;
 var initialData = JSON.parse(localStorage.getItem('completeProfileData'));
     console.log("new data fetch:",initialData);
-const handleClick=(e)=>{
-const select= document.getElementById("country");
-setcountryFlag(`https://flagpedia.net/data/flags/h80/${select?.selectedOptions[0].dataset.countrycode.toString().toLowerCase()}.png`)
-setdailCode(e.target.value)
-}
-const handleSave= (e)=>{
-    props.userInfo.setPhone(dailCode +" " +e.target.value)
-    console.log("code:",dailCode);
+// const handleClick=(e)=>{
+// const select= document.getElementById("country");
+// setcountryFlag(`https://flagpedia.net/data/flags/h80/${select?.selectedOptions[0].dataset.countrycode.toString().toLowerCase()}.png`)
+// setdailCode(e.target.value)
+// }
+// const handleSave= (e)=>{
+//     props.userInfo.setPhone(dailCode +" " +e.target.value)
+//     console.log("code:",dailCode);
      
-}
+// }
 
  let config = {
         headers: {
@@ -45,7 +45,7 @@ const formik = useFormik({
     },
 
     onSubmit:(values) => {
-        const {first_name: first_name, last_name:last_name,phone=phone,email=email} = values;
+        const {first_name,last_name,phone,email} = values;
         const sendValues={
             user:pk, first_name,last_name,email,phone
         }

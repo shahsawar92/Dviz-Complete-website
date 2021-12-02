@@ -12,9 +12,9 @@ import axios from 'axios';
 export default function Menu() {
 	//definitions
 	var retrievedObject = JSON.parse(localStorage.getItem('userdata'));
-	console.log('retrievedObject: ', retrievedObject);
+	
 	const location = useLocation();
-    const {toggle, setToggle, noOfNotifications,updateProfileDAta,updateInfoprofile,setupdateInfoprofile} = useContext(useContexts);	
+    const {toggle, setToggle, noOfNotifications,updateProfileDAta,updateInfoprofile} = useContext(useContexts);	
 	const userImage=useContext(useContexts);
 	const [userData,setuserData]=useState({})
 	// actions
@@ -40,18 +40,20 @@ const profileStyle={
 		height:"373px"
 	};
 
-	let config = {
-        headers: {
-            'Content-Type': 'application/json'
-            
-        }
-      }
+	
+
       const URL_PROFILE="https://shahbaz.dviz.tech/profile_page/"
 
     
 
       //useeffect for profiledata
         useEffect(()=>{
+			let config = {
+				headers: {
+					'Content-Type': 'application/json'
+					
+				}
+			  }
        
         axios.get(URL_PROFILE,{
             params: {
@@ -67,7 +69,7 @@ const profileStyle={
     }).catch(error=>{ console.log(error); }  ) 
    },
     
-    [updateProfileDAta,updateInfoprofile])
+    [updateProfileDAta,updateInfoprofile,retrievedObject?.user?.pk,retrievedObject?.user?.username])
 	
     return (
         

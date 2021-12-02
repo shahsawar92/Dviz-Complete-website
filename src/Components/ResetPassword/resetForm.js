@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import * as ROUTES from '../../Constants/Routes';
 import { useFormik , } from 'formik';
 import * as Yup from 'yup';
@@ -10,8 +10,8 @@ import './style.css'
  
  const ResetForm = () => {
    //sent to store
-   const [isSubmitting, setSbumitting]=useState(false);
-   const [errorMsg,setErrorMsg]=useState()
+   const [isSubmitting]=useState(false);
+   const [errorMsg]=useState()
   
 //   let config = {
 //     headers: {
@@ -19,7 +19,7 @@ import './style.css'
 //     }
 //   }
 //   const URL='https://shahbaz.dviz.tech/rest-auth/login/';
-const history=useHistory();
+// const history=useHistory();
    const formik = useFormik({
      initialValues: {
        newPassword: '',

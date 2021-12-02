@@ -52,7 +52,7 @@ export const Globalprovider=({children})=>{
 // count  no of notifications
 useEffect(() => {
 SetnoOfNotifications(notificationData.length)    
-}, [notificationData])
+}, [])
 
 //set cards to dashboard and insure no duplicate entry there.
 // useEffect(() => {
@@ -100,7 +100,7 @@ function allCat(e){
 //return the wrapper 
     return (
         <useContexts.Provider value={{
-            carData:state.carData, PopUpDataList:initial.PopUpDataList, outreach,growth,content,allCat,search,toggle,toggleButton,settoggleButton, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData,updateInfo,setupdateInfo,updateInfoprofile,setupdateInfoprofile,updateProfileDAta,setupdateProfileData
+            carData:state.carData, PopUpDataList:initial.PopUpDataList,Dashboard_data, outreach,growth,content,allCat,search,toggle,toggleButton,settoggleButton, setToggle, profileImg,setProfileImg,setpopUpName,popUpData,setpopUpData,setDashboard_data,Dashboard_card,noOfNotifications,SetnoOfNotifications,loginInfo,setloginInfo,profileData,setProfileData,updateInfo,setupdateInfo,updateInfoprofile,setupdateInfoprofile,updateProfileDAta,setupdateProfileData,setDashboard_card
         }}>
             {children}
         </useContexts.Provider>

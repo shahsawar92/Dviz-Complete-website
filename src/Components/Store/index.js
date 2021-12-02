@@ -1,10 +1,10 @@
-import React, { useState,useContext, useMemo, useEffect } from 'react'   
+import React, { useState,useContext, useMemo } from 'react'   
 import '../Dashboard/style.css';
 import Card from '../Card/card.js';
 // import Card2 from '../Card/card2';
 import Model from '../modal/modal';
 import {useContexts} from '../Context/context'
-import axios from 'axios';
+// import axios from 'axios';
 
 function Store() {
     const {carData,setpopUpName} = useContext(useContexts);
@@ -37,11 +37,11 @@ function Store() {
         setpopUpName(props);
         setVisiable(true);
     }
-   const cardData=useMemo(() => carData, carData) 
+   const cardData=useMemo(() => carData, [carData]) 
 
 
     return (
-        <div className={"   pt-5  pb-5 w-full  h-full "}>
+        <div className={"pt-5  pb-5 w-full  h-full "}>
        <div  className={"flex flex-wrap w-full justify-center "}>
             { cardData.map( single=>(
                 

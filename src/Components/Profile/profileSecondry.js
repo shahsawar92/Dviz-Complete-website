@@ -5,7 +5,7 @@ import { useContexts } from '../Context/context';
 import TranscationHistory from './transcationHistory';
 
 import axios from 'axios';
-import { validateYupSchema } from 'formik';
+// import { validateYupSchema } from 'formik';
 
 
 export default function ProfileSecondry() {
@@ -43,9 +43,7 @@ export default function ProfileSecondry() {
             }
         console.log('profile info response :',response);
     }).catch(error=>{ console.log(error); }  ) 
-   },
-    
-    [])
+   })
   
         
       
@@ -79,13 +77,13 @@ export default function ProfileSecondry() {
 
     const formData = new FormData();
     formData.append("file", profileImg);
-        let newImage= new FileReader();
+        // let newImage= new FileReader();
         console.log("newimage here",formData);
-    const changePhoto=(e)=>{
-        const formData = new FormData();
-    formData.append("file", profileImg);
-        let newImage= new FileReader();
-        console.log("newimage here",formData);
+    // const changePhoto=(e)=>{
+    //     const formData = new FormData();
+    // formData.append("file", profileImg);
+    //     let newImage= new FileReader();
+    //     console.log("newimage here",formData);
         
         // newImage.onload=()=>{
         //     if(newImage.readyState===2){
@@ -94,7 +92,7 @@ export default function ProfileSecondry() {
         // }
         // newImage.readAsDataURL(e.target.files[0]);
         // e.preventDefault();
-    }
+    // }
 
     return (
         <div className="relative z-100">

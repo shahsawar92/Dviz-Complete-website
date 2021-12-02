@@ -1,10 +1,12 @@
 import React from 'react'
 
 export default function ModelForCookies(props) {
-    const {setshowModel,showModel} = props;
+    const {setshowModel} = props;
     const handleBack=()=>{
         setshowModel(false);
     }   
+
+    
     return (
         <>
         <div
@@ -24,7 +26,7 @@ export default function ModelForCookies(props) {
                 {/* discription  */}
                 <div class="grid grid-cols-2 divide-x ">
                         <form action="">
-                            
+
                         </form>
                         <form action="">
 

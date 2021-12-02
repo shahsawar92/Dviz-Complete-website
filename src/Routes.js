@@ -9,7 +9,6 @@ import EmailValidation from "./Components/AllFlows/EmailValidationFlow";
 import PhoneValidation from "./Components/AllFlows/PhoneValidationFlow";
 import InstagramFlow from "./Components/AllFlows/Instagram";
 import Cars from "./Components/AllFlows/CarsFlow";
-import SecondryMenu_Cars from "./Components/AllFlows/CarsFlow/secondryMenu";
 //setting pages for simple routes!
 
 //profile route

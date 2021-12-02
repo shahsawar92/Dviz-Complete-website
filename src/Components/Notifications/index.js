@@ -44,7 +44,7 @@ function Notifications() {
         </button> ) ,
     },
   ];
- const data= useMemo(()=>notificationData,notificationData);
+ const data= useMemo(()=>notificationData,[]);
     return (
         <>
         <div className="w-11/12 m-auto mt-12" >

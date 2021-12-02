@@ -1,6 +1,6 @@
 import React, { useRef,useState } from 'react'
 import './style.css';
-export default function SecondryMenu_PhoneValidation() {
+export default function SecondryMenuPhoneValidation() {
     const ref = useRef()
     const [ExtentionValue,SetExtensionValue]=useState(false)
 
@@ -19,14 +19,14 @@ export default function SecondryMenu_PhoneValidation() {
         console.log("testing file:",inputID);
         return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(inputID);
     }
-    const handleClick=()=>{
-        if(ExtentionValue){
-            alert("please insert correct extention file!");
-        }
-        else{
-            alert("are you sure to submit")
-        }
-    }
+    // const handleClick=()=>{
+    //     if(ExtentionValue){
+    //         alert("please insert correct extention file!");
+    //     }
+    //     else{
+    //         alert("are you sure to submit")
+    //     }
+    // }
    
     return (
         <div className="w-5/6 overflow-y-auto  ">

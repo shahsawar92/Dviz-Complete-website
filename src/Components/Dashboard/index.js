@@ -15,11 +15,7 @@ function Dashboard() {
 
      
     const Card_Check_URL="https://shahbaz.dviz.tech/store/";
-    let config = {
-        headers: {
-           'Content-Type': 'application/json'
-        }
-      }
+    
     const history=useHistory();
     
     var cardDataCheck = JSON.parse(localStorage.getItem('cardCheck'));
@@ -38,17 +34,22 @@ function Dashboard() {
     
 
 useEffect(()=>{
-
-    axios.get(Card_Check_URL,{
+const paramseffect={
         params: {
             "id":retrievedObject.user.pk,
             "username":retrievedObject.user.username
     }
-        },config).then((res)=>{
+        }
+        let config = {
+            headers: {
+               'Content-Type': 'application/json'
+            }
+          }
+    axios.get(Card_Check_URL,paramseffect,config).then((res)=>{
             
             localStorage.setItem("cardCheck",JSON.stringify(res.data))
           })
-},[toggleButton])
+},[toggleButton,retrievedObject.user.pk,retrievedObject.user.username])
 
 useEffect(() => {
     setTimeout(()=>{
@@ -57,10 +58,10 @@ useEffect(() => {
      const filteredCard=(initial.carData.filter(card => (card.checkDashboard===true)))
      
       setDashboard_card(Array.from(new Set([...Dashboard_card,...filteredCard])))
- console.log("after setdashboard in useeffect",toggleButton);
+ 
 }, 2000)
      
- }, [toggleButton])
+ }, [toggleButton,initial.carData,Dashboard_card])
 
     // Object.entries(cardDataCheck).map(([key, value]) => { // maping all the keys to check weather a card is active or not
     //     console.log(key,value);

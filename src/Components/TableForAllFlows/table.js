@@ -1,10 +1,9 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React from 'react';
 import { useTable,useSortBy,useGlobalFilter ,usePagination} from "react-table";
 import {icons} from '../../Utilities/flow_icons'
 import {GlobalFilter} from './Globalfilter'
 import './style.css'
 import { useExportData } from "react-table-plugins";
-import Papa from "papaparse";
 import XLSX from "xlsx";
 
 
@@ -37,7 +36,7 @@ const Table =  ({ columns, data ,downloadBtn}) => {
     getTableBodyProps, // table body props from react-table
     headerGroups, // headerGroups, if your table has groupings
     page,
-    rows, // rows for the table based  on the data passed
+     // rows for the table based  on the data passed
     prepareRow, // Prepare the row (this function needs to be called for each row before getting the row props)
     setGlobalFilter,
     canPreviousPage,

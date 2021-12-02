@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from 'axios'
 import { useContexts } from "../Context/context";
 export default function PayPal(props) {
@@ -75,7 +75,7 @@ export default function PayPal(props) {
       },
   
   }).render('#paypal-button-container')
-    },[1])
+    })
   return (
     <>
       (
